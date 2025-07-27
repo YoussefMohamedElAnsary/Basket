@@ -12,7 +12,7 @@ import { faCcVisa, faCcMastercard, faCcStripe, faCcPaypal, faFacebookF, faTwitte
 const Footer = () => {
     return (
         <div className='w-full'>
-            <div className='w-full relative flex flex-col md:flex-row items-stretch bg-[#35AFA0] min-h-[320px] px-2 pt-2 md:px-6 md:pt-4 lg:px-16 lg:pt-5 pb-0'>
+            <div className='w-full relative flex flex-col md:flex-row items-stretch bg-[#35AFA0] min-h-[320px] px-2 pt-2 md:px-6 md:pt-4 lg:px-16 lg:pt-5 pb-0 lg:justify-center lg:items-center lg:gap-x-8'>
                 <div className='flex flex-col text-white text-2xl w-full md:w-1/2 flex-grow'>
                     <div className='flex flex-row gap-2 font-light text-[18px]'>
                         <a href="#" className='underline decoration-white decoration-1'>$20 discount </a>for your first order
@@ -177,7 +177,7 @@ const Footer = () => {
                             </div>
                         </div>
                     </div>
-                    {/* Bottom-most bar */}
+                    {/* Bottom-most bar with payment icons */}
                     <div className="w-full border-t border-gray-200 mt-8 pt-4 flex flex-col md:flex-row justify-between items-center text-gray-400 text-[14px] gap-4">
                         <div className="w-full md:w-auto text-left">Copyright 2025 © All rights reserved by Blackrise Theme</div>
                         <div className="flex flex-row gap-4 justify-center w-full md:w-auto">
@@ -185,11 +185,19 @@ const Footer = () => {
                             <a href="#" className="hover:text-[#35AFA0]">Terms and Conditions</a>
                             <a href="#" className="hover:text-[#35AFA0]">Cookie</a>
                         </div>
-                        <div className="flex flex-row gap-3 justify-end w-full md:w-auto">
-                            <FontAwesomeIcon icon={faCcVisa} className="text-2xl" />
-                            <FontAwesomeIcon icon={faCcMastercard} className="text-2xl" />
-                            <FontAwesomeIcon icon={faCcStripe} className="text-2xl" />
-                            <FontAwesomeIcon icon={faCcPaypal} className="text-2xl" />
+                        <div className="flex flex-row gap-2 justify-end w-full md:w-auto">
+                            <span className="h-8 w-8 flex items-center justify-center border border-gray-200 rounded bg-white p-1">
+                                <FontAwesomeIcon icon={faCcVisa} className="text-2xl text-gray-500" />
+                            </span>
+                            <span className="h-8 w-8 flex items-center justify-center border border-gray-200 rounded bg-white p-1">
+                                <FontAwesomeIcon icon={faCcMastercard} className="text-2xl text-gray-500" />
+                            </span>
+                            <span className="h-8 w-8 flex items-center justify-center border border-gray-200 rounded bg-white p-1">
+                                <FontAwesomeIcon icon={faCcStripe} className="text-2xl text-gray-500" />
+                            </span>
+                            <span className="h-8 w-8 flex items-center justify-center border border-gray-200 rounded bg-white p-1">
+                                <FontAwesomeIcon icon={faCcPaypal} className="text-2xl text-gray-500" />
+                            </span>
                         </div>
                     </div>
                 </div>
