@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
-import secure_delivery_icon from '../assets/secure-delivery-icon.png'
-import nav_logo from '../assets/nav-logo.png'
-import shopping_basket from '../assets/shopping-basket.png'
+import secure_delivery_icon from '../assets/nav-assets/secure-delivery-icon.png'
+import nav_logo from '../assets/nav-assets/nav-logo.png'
+import shopping_basket from '../assets/nav-assets/shopping-basket.png'
 import { Menu } from '@headlessui/react'
 
 const Navbar = () => {
@@ -35,6 +35,31 @@ const Navbar = () => {
                                 <path fillRule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clipRule="evenodd" />
                             </svg>
                         </Menu.Button>
+                        <Menu.Items className="absolute right-0 mt-2 w-32 origin-top-right bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none z-50">
+                            <div className="py-1">
+                                <Menu.Item>
+                                    {({ active }) => (
+                                        <a href="#" className={`${active ? 'bg-gray-100' : ''} block px-4 py-2 text-sm text-gray-700`}>
+                                            English
+                                        </a>
+                                    )}
+                                </Menu.Item>
+                                <Menu.Item>
+                                    {({ active }) => (
+                                        <a href="#" className={`${active ? 'bg-gray-100' : ''} block px-4 py-2 text-sm text-gray-700`}>
+                                            Spanish
+                                        </a>
+                                    )}
+                                </Menu.Item>
+                                <Menu.Item>
+                                    {({ active }) => (
+                                        <a href="#" className={`${active ? 'bg-gray-100' : ''} block px-4 py-2 text-sm text-gray-700`}>
+                                            French
+                                        </a>
+                                    )}
+                                </Menu.Item>
+                            </div>
+                        </Menu.Items>
                     </Menu>
                     <Menu as="div" className="relative inline-block">
                         <Menu.Button className="inline-flex items-center gap-1 px-2 py-1 text-sm font-medium text-gray-900 hover:bg-gray-50 focus:outline-none">
@@ -43,6 +68,31 @@ const Navbar = () => {
                                 <path fillRule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clipRule="evenodd" />
                             </svg>
                         </Menu.Button>
+                        <Menu.Items className="absolute right-0 mt-2 w-32 origin-top-right bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none z-50">
+                            <div className="py-1">
+                                <Menu.Item>
+                                    {({ active }) => (
+                                        <a href="#" className={`${active ? 'bg-gray-100' : ''} block px-4 py-2 text-sm text-gray-700`}>
+                                            USD
+                                        </a>
+                                    )}
+                                </Menu.Item>
+                                <Menu.Item>
+                                    {({ active }) => (
+                                        <a href="#" className={`${active ? 'bg-gray-100' : ''} block px-4 py-2 text-sm text-gray-700`}>
+                                            EUR
+                                        </a>
+                                    )}
+                                </Menu.Item>
+                                <Menu.Item>
+                                    {({ active }) => (
+                                        <a href="#" className={`${active ? 'bg-gray-100' : ''} block px-4 py-2 text-sm text-gray-700`}>
+                                            GBP
+                                        </a>
+                                    )}
+                                </Menu.Item>
+                            </div>
+                        </Menu.Items>
                     </Menu>
                 </div>
             </div>
@@ -112,6 +162,45 @@ const Navbar = () => {
                             </svg>
                         </div>
                     </Menu.Button>
+                    <Menu.Items className="absolute z-50 w-full lg:w-[260px] mt-2 origin-top-left bg-white rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                        <div className="py-2">
+                            <Menu.Item>
+                                {({ active }) => (
+                                    <a href="#" className={`${active ? 'bg-gray-100' : ''} block px-4 py-2 text-sm text-gray-700`}>
+                                        Fruits & Vegetables
+                                    </a>
+                                )}
+                            </Menu.Item>
+                            <Menu.Item>
+                                {({ active }) => (
+                                    <a href="#" className={`${active ? 'bg-gray-100' : ''} block px-4 py-2 text-sm text-gray-700`}>
+                                        Meat & Seafood
+                                    </a>
+                                )}
+                            </Menu.Item>
+                            <Menu.Item>
+                                {({ active }) => (
+                                    <a href="#" className={`${active ? 'bg-gray-100' : ''} block px-4 py-2 text-sm text-gray-700`}>
+                                        Bakery
+                                    </a>
+                                )}
+                            </Menu.Item>
+                            <Menu.Item>
+                                {({ active }) => (
+                                    <a href="#" className={`${active ? 'bg-gray-100' : ''} block px-4 py-2 text-sm text-gray-700`}>
+                                        Beverages
+                                    </a>
+                                )}
+                            </Menu.Item>
+                            <Menu.Item>
+                                {({ active }) => (
+                                    <a href="#" className={`${active ? 'bg-gray-100' : ''} block px-4 py-2 text-sm text-gray-700`}>
+                                        Dairy & Eggs
+                                    </a>
+                                )}
+                            </Menu.Item>
+                        </div>
+                    </Menu.Items>
                     <div className="absolute -bottom-4 left-1/2 transform -translate-x-1/2">
                         <div className="bg-[#EDEEF5] border-2 border-white px-6 py-1 rounded-full text-[11px] whitespace-nowrap text-[#637381] font-medium">
                             TOTAL 50 PRODUCTS
@@ -139,24 +228,105 @@ const Navbar = () => {
                 <nav className={`${isMobileMenuOpen ? 'flex' : 'hidden'} lg:flex flex-col lg:flex-row w-full lg:w-auto lg:items-center gap-4 lg:gap-8 lg:ml-10`}>
                     <a href="#" className='text-[#35AFA0] font-medium'>HOME</a>
                     <a href="#" className='text-gray-600 hover:text-[#35AFA0]'>SHOP</a>
-                    <a href="#" className='text-gray-600 hover:text-[#35AFA0] flex items-center gap-1'>
-                        MEATS & SEAFOOD
-                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
-                        </svg>
-                    </a>
-                    <a href="#" className='text-gray-600 hover:text-[#35AFA0] flex items-center gap-1'>
-                        BAKERY
-                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
-                        </svg>
-                    </a>
-                    <a href="#" className='text-gray-600 hover:text-[#35AFA0] flex items-center gap-1'>
-                        BEVERAGES
-                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
-                        </svg>
-                    </a>
+                    <Menu as="div" className="relative inline-block">
+                        <Menu.Button className='text-gray-600 hover:text-[#35AFA0] flex items-center gap-1'>
+                            MEATS & SEAFOOD
+                            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
+                            </svg>
+                        </Menu.Button>
+                        <Menu.Items className="absolute z-50 w-48 mt-2 origin-top-left bg-white rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                            <div className="py-2">
+                                <Menu.Item>
+                                    {({ active }) => (
+                                        <a href="#" className={`${active ? 'bg-gray-100' : ''} block px-4 py-2 text-sm text-gray-700`}>
+                                            Fresh Meat
+                                        </a>
+                                    )}
+                                </Menu.Item>
+                                <Menu.Item>
+                                    {({ active }) => (
+                                        <a href="#" className={`${active ? 'bg-gray-100' : ''} block px-4 py-2 text-sm text-gray-700`}>
+                                            Fish
+                                        </a>
+                                    )}
+                                </Menu.Item>
+                                <Menu.Item>
+                                    {({ active }) => (
+                                        <a href="#" className={`${active ? 'bg-gray-100' : ''} block px-4 py-2 text-sm text-gray-700`}>
+                                            Shellfish
+                                        </a>
+                                    )}
+                                </Menu.Item>
+                            </div>
+                        </Menu.Items>
+                    </Menu>
+                    <Menu as="div" className="relative inline-block">
+                        <Menu.Button className='text-gray-600 hover:text-[#35AFA0] flex items-center gap-1'>
+                            BAKERY
+                            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
+                            </svg>
+                        </Menu.Button>
+                        <Menu.Items className="absolute z-50 w-48 mt-2 origin-top-left bg-white rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                            <div className="py-2">
+                                <Menu.Item>
+                                    {({ active }) => (
+                                        <a href="#" className={`${active ? 'bg-gray-100' : ''} block px-4 py-2 text-sm text-gray-700`}>
+                                            Bread
+                                        </a>
+                                    )}
+                                </Menu.Item>
+                                <Menu.Item>
+                                    {({ active }) => (
+                                        <a href="#" className={`${active ? 'bg-gray-100' : ''} block px-4 py-2 text-sm text-gray-700`}>
+                                            Pastries
+                                        </a>
+                                    )}
+                                </Menu.Item>
+                                <Menu.Item>
+                                    {({ active }) => (
+                                        <a href="#" className={`${active ? 'bg-gray-100' : ''} block px-4 py-2 text-sm text-gray-700`}>
+                                            Cakes
+                                        </a>
+                                    )}
+                                </Menu.Item>
+                            </div>
+                        </Menu.Items>
+                    </Menu>
+                    <Menu as="div" className="relative inline-block">
+                        <Menu.Button className='text-gray-600 hover:text-[#35AFA0] flex items-center gap-1'>
+                            BEVERAGES
+                            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
+                            </svg>
+                        </Menu.Button>
+                        <Menu.Items className="absolute z-50 w-48 mt-2 origin-top-left bg-white rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                            <div className="py-2">
+                                <Menu.Item>
+                                    {({ active }) => (
+                                        <a href="#" className={`${active ? 'bg-gray-100' : ''} block px-4 py-2 text-sm text-gray-700`}>
+                                            Soft Drinks
+                                        </a>
+                                    )}
+                                </Menu.Item>
+                                <Menu.Item>
+                                    {({ active }) => (
+                                        <a href="#" className={`${active ? 'bg-gray-100' : ''} block px-4 py-2 text-sm text-gray-700`}>
+                                            Coffee & Tea
+                                        </a>
+                                    )}
+                                </Menu.Item>
+                                <Menu.Item>
+                                    {({ active }) => (
+                                        <a href="#" className={`${active ? 'bg-gray-100' : ''} block px-4 py-2 text-sm text-gray-700`}>
+                                            Juices
+                                        </a>
+                                    )}
+                                </Menu.Item>
+                            </div>
+                        </Menu.Items>
+                    </Menu>
                     <a href="#" className='text-gray-600 hover:text-[#35AFA0]'>BLOG</a>
                     <a href="#" className='text-gray-600 hover:text-[#35AFA0]'>CONTACT</a>
                 </nav>
