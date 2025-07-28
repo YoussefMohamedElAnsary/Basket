@@ -20,7 +20,7 @@ function   DiscountSection() {
   
     const visibleProducts = products.slice(0, 0 + itemsPerPage);
   return (
-    <div class="container  grid grid-cols-4  gap-0">
+    <div class="px-[200px]  grid grid-cols-4 gap-0 m-5 ">
         {visibleProducts.map((product) => (
              <div key={product.id} class="max-w-xs w-full border border-gray-200 p-4 relative font-sans bg-white">
     

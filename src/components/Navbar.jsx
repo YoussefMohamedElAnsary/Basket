@@ -8,7 +8,7 @@ const Navbar = () => {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
     return (
-        <div className='w-full'>
+        <div className='w-full '>
             {/* Top notification bar */}
             <div className='text-white bg-[#35AFA0] w-full flex items-center justify-center h-10 text-[13px] px-4 text-center'>
                 Due to current circumstances, there may be slight delays in order processing.

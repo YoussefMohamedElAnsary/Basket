@@ -20,7 +20,7 @@ function Card() {
   };
 
   return (
-    <div className="relative w-full">
+    <div className="relative px-[200px] w-full ">
       {/* Arrows */}
       <button
         onClick={scrollLeft}
