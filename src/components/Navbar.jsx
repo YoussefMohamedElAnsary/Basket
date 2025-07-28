@@ -148,6 +148,21 @@ const Navbar = () => {
                 </div>
 
                 <div className='flex items-center gap-4 lg:gap-6'>
+                    <div className="flex items-center gap-4">
+                    <button
+                        onClick={() => setIsSignInOpen(true)}
+                        className="text-white bg-[#35AFA0] px-4 py-2 rounded-full hover:bg-[#2e998e] transition-all duration-200 text-sm font-medium"
+                    >
+                        Sign In
+                    </button>
+
+                    <button
+                    onClick={() => setIsSignUpOpen(true)}
+                    className="text-[#35AFA0] border border-[#35AFA0] px-4 py-2 rounded-full hover:bg-[#35AFA0] hover:text-white transition-all duration-200 text-sm font-medium"
+                    >
+                        Sign Up
+                    </button>
+                    </div>
                     <a href="#" className='flex items-center gap-4'>
                         <div className='w-8 h-8 lg:w-9 lg:h-9 rounded-full bg-gray-100 flex items-center justify-center'>
                             <svg className="w-4 h-4 lg:w-5 lg:h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -348,28 +363,8 @@ const Navbar = () => {
                     </Menu>
                     <a href="#" className='text-gray-600 hover:text-[#35AFA0]'>BLOG</a>
                     <Link to="/contact" className='text-gray-600 hover:text-[#35AFA0]'>Contact</Link>
-                    <div className="bg-white w-full flex justify-between items-center px-8 py-4 border-b border-gray-200">
-        {/* اللوجو وغيره من العناصر هنا */}
-
-        <div className="flex items-center gap-4">
-          {/* ✅ زر Sign In يفتح المودال */}
-          <button
-            onClick={() => setIsSignInOpen(true)}
-            className="text-white bg-[#35AFA0] px-4 py-2 rounded-full hover:bg-[#2e998e] transition-all duration-200 text-sm font-medium"
-          >
-            Sign In
-          </button>
-
-         <button
-         onClick={() => setIsSignUpOpen(true)}
-         className="text-[#35AFA0] border border-[#35AFA0] px-4 py-2 rounded-full hover:bg-[#35AFA0] hover:text-white transition-all duration-200 text-sm font-medium"
-         >
-            Sign Up
-          </button>
-        </div>
-      </div>
-     {isSignInOpen && <SignInModal onClose={() => setIsSignInOpen(false)} />}
-     {isSignUpOpen && <SignUpModal onClose={() => setIsSignUpOpen(false)} />}
+                    {isSignInOpen && <SignInModal onClose={() => setIsSignInOpen(false)} />}
+                    {isSignUpOpen && <SignUpModal onClose={() => setIsSignUpOpen(false)} />}
                 </nav>
             </div>
         </div>
