@@ -1,13 +1,29 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import secure_delivery_icon from '../assets/nav-assets/secure-delivery-icon.png'
 import nav_logo from '../assets/nav-assets/nav-logo.png'
 import shopping_basket from '../assets/nav-assets/shopping-basket.png'
 import { Menu } from '@headlessui/react'
 import { Link } from 'react-router-dom';
-
+import SignInModal from './SignInModal';
+import SignUpModal from './SignUpModal';
 
 const Navbar = () => {
+   
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+    const [isSignInOpen, setIsSignInOpen] = useState(false);
+    const [isSignUpOpen, setIsSignUpOpen] = useState(false);
+    useEffect(() => {
+    const openSignUp = () => {
+        setIsSignUpOpen(true);
+    };
+
+    window.addEventListener('openSignUp', openSignUp);
+
+    return () => {
+        window.removeEventListener('openSignUp', openSignUp);
+    };
+    }, []);
+ 
 
     return (
         <div className='w-full'>
@@ -122,6 +138,7 @@ const Navbar = () => {
                             placeholder="Search for Products, fruit, meat, eggs .etc..."
                             className='w-full px-4 py-3 bg-gray-100 rounded-md focus:outline-none text-sm'
                         />
+                        
                         <button className='absolute right-3 top-1/2 transform -translate-y-1/2'>
                             <svg className="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
@@ -331,6 +348,28 @@ const Navbar = () => {
                     </Menu>
                     <a href="#" className='text-gray-600 hover:text-[#35AFA0]'>BLOG</a>
                     <Link to="/contact" className='text-gray-600 hover:text-[#35AFA0]'>Contact</Link>
+                    <div className="bg-white w-full flex justify-between items-center px-8 py-4 border-b border-gray-200">
+        {/* اللوجو وغيره من العناصر هنا */}
+
+        <div className="flex items-center gap-4">
+          {/* ✅ زر Sign In يفتح المودال */}
+          <button
+            onClick={() => setIsSignInOpen(true)}
+            className="text-white bg-[#35AFA0] px-4 py-2 rounded-full hover:bg-[#2e998e] transition-all duration-200 text-sm font-medium"
+          >
+            Sign In
+          </button>
+
+         <button
+         onClick={() => setIsSignUpOpen(true)}
+         className="text-[#35AFA0] border border-[#35AFA0] px-4 py-2 rounded-full hover:bg-[#35AFA0] hover:text-white transition-all duration-200 text-sm font-medium"
+         >
+            Sign Up
+          </button>
+        </div>
+      </div>
+     {isSignInOpen && <SignInModal onClose={() => setIsSignInOpen(false)} />}
+     {isSignUpOpen && <SignUpModal onClose={() => setIsSignUpOpen(false)} />}
                 </nav>
             </div>
         </div>
