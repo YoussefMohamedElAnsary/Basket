@@ -1,20 +1,21 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
-import { Route, Routes } from 'react-router-dom'
-import Home from './pages/Home.jsx'
-import Navbar from './components/Navbar'
+import{Routes, Route } from 'react-router-dom';
+import Navbar from './components/Navbar';
+import Home from './pages/Home';
+import About from './components/About';
+import Contact from './components/Contact';
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
     <>
-   <Home />
-      <Navbar />
+      <Navbar /> {/* دا بيظهر دايمًا فوق كل الصفحات */}
+      
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/contact" element={<Contact />} />
+      </Routes>
     </>
-  )
+  );
 }
 
-export default App
+export default App;

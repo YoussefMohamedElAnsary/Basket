@@ -3,6 +3,8 @@ import secure_delivery_icon from '../assets/secure-delivery-icon.png'
 import nav_logo from '../assets/nav-logo.png'
 import shopping_basket from '../assets/shopping-basket.png'
 import { Menu } from '@headlessui/react'
+import { Link } from 'react-router-dom';
+
 
 const Navbar = () => {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -17,7 +19,7 @@ const Navbar = () => {
             {/* Secondary bar */}
             <div className='bg-white w-full h-8 items-center justify-center px-4 md:px-8 lg:px-32 border-b border-gray-200 hidden md:flex'>
                 <ul className='flex items-center gap-5 text-[12px] mr-auto'>
-                    <li><a href="/">About Us</a></li>
+                    <Link to="/about">About</Link>
                     <li><a href="/">Compare</a></li>
                     <li><a href="/">Wishlist</a></li>
                 </ul>
@@ -158,7 +160,7 @@ const Navbar = () => {
                         </svg>
                     </a>
                     <a href="#" className='text-gray-600 hover:text-[#35AFA0]'>BLOG</a>
-                    <a href="#" className='text-gray-600 hover:text-[#35AFA0]'>CONTACT</a>
+                    <Link to="/contact" className='text-gray-600 hover:text-[#35AFA0]'>Contact</Link>
                 </nav>
             </div>
         </div>
