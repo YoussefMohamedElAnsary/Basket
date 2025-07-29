@@ -13,6 +13,7 @@ const Navbar = () => {
     const [isSignInOpen, setIsSignInOpen] = useState(false);
     const [isSignUpOpen, setIsSignUpOpen] = useState(false);
     const [selectedMenu, setSelectedMenu] = useState('');
+    const [selectedMainNav, setSelectedMainNav] = useState('home');
     useEffect(() => {
     const openSignUp = () => {
         setIsSignUpOpen(true);
@@ -283,22 +284,28 @@ const Navbar = () => {
                 <nav className={`${isMobileMenuOpen ? 'flex' : 'hidden'} lg:flex flex-col lg:flex-row w-full lg:w-auto lg:items-center gap-4 lg:gap-8 lg:ml-10`}>
                     <NavLink
                         to="/"
+                        onClick={() => setSelectedMainNav('home')}
                         className={({ isActive }) =>
-                            `cursor-pointer ${isActive ? 'text-[#35AFA0] font-bold' : 'text-gray-700 font-normal'}`
+                            `cursor-pointer ${selectedMainNav === 'home' ? 'text-[#35AFA0] font-bold' : 'text-gray-700 font-normal'}`
                         }
                     >
                         HOME
                     </NavLink>
                     <NavLink
                         to="/shop"
+                        onClick={() => setSelectedMainNav('shop')}
                         className={({ isActive }) =>
-                            `cursor-pointer ${isActive ? 'text-[#35AFA0] font-bold' : 'text-gray-700 font-normal'}`
+                            `cursor-pointer ${selectedMainNav === 'shop' ? 'text-[#35AFA0] font-bold' : 'text-gray-700 font-normal'}`
                         }
                     >
                         SHOP
                     </NavLink>
                     <Menu as="div" className="relative inline-block">
-                        <Menu.Button className='text-gray-600 hover:text-[#35AFA0] flex items-center gap-1 cursor-pointer'>
+                        <Menu.Button
+                            className={`flex items-center gap-1 cursor-pointer 
+                                ${selectedMainNav === 'meats' ? 'text-[#35AFA0] font-bold' : 'text-gray-600 font-normal'} 
+                                hover:text-[#35AFA0]`}
+                        >
                             MEATS & SEAFOOD
                             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
@@ -310,7 +317,10 @@ const Navbar = () => {
                                     {({ active }) => (
                                         <Link
                                             to="#"
-                                            onClick={() => setSelectedMenu('freshmeat')}
+                                            onClick={() => {
+                                                setSelectedMenu('freshmeat');
+                                                setSelectedMainNav('meats');
+                                            }}
                                             className={`${active ? 'bg-gray-100' : ''} block px-4 py-2 text-sm cursor-pointer ${selectedMenu === 'freshmeat' ? 'text-[#35AFA0] font-semibold' : 'text-gray-700'}`}
                                         >
                                             Fresh Meat
@@ -321,7 +331,10 @@ const Navbar = () => {
                                     {({ active }) => (
                                         <Link
                                             to="#"
-                                            onClick={() => setSelectedMenu('fish')}
+                                            onClick={() => {
+                                                setSelectedMenu('fish');
+                                                setSelectedMainNav('meats');
+                                            }}
                                             className={`${active ? 'bg-gray-100' : ''} block px-4 py-2 text-sm cursor-pointer ${selectedMenu === 'fish' ? 'text-[#35AFA0] font-semibold' : 'text-gray-700'}`}
                                         >
                                             Fish
@@ -332,7 +345,10 @@ const Navbar = () => {
                                     {({ active }) => (
                                         <Link
                                             to="#"
-                                            onClick={() => setSelectedMenu('shellfish')}
+                                            onClick={() => {
+                                                setSelectedMenu('shellfish');
+                                                setSelectedMainNav('meats');
+                                            }}
                                             className={`${active ? 'bg-gray-100' : ''} block px-4 py-2 text-sm cursor-pointer ${selectedMenu === 'shellfish' ? 'text-[#35AFA0] font-semibold' : 'text-gray-700'}`}
                                         >
                                             Shellfish
@@ -343,7 +359,11 @@ const Navbar = () => {
                         </Menu.Items>
                     </Menu>
                     <Menu as="div" className="relative inline-block">
-                        <Menu.Button className='text-gray-600 hover:text-[#35AFA0] flex items-center gap-1 cursor-pointer'>
+                        <Menu.Button
+                            className={`flex items-center gap-1 cursor-pointer 
+                                ${selectedMainNav === 'bakery' ? 'text-[#35AFA0] font-bold' : 'text-gray-600 font-normal'} 
+                                hover:text-[#35AFA0]`}
+                        >
                             BAKERY
                             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
@@ -355,7 +375,10 @@ const Navbar = () => {
                                     {({ active }) => (
                                         <Link
                                             to="#"
-                                            onClick={() => setSelectedMenu('bread')}
+                                            onClick={() => {
+                                                setSelectedMenu('bread');
+                                                setSelectedMainNav('bakery');
+                                            }}
                                             className={`${active ? 'bg-gray-100' : ''} block px-4 py-2 text-sm cursor-pointer ${selectedMenu === 'bread' ? 'text-[#35AFA0] font-semibold' : 'text-gray-700'}`}
                                         >
                                             Bread
@@ -366,7 +389,10 @@ const Navbar = () => {
                                     {({ active }) => (
                                         <Link
                                             to="#"
-                                            onClick={() => setSelectedMenu('pastries')}
+                                            onClick={() => {
+                                                setSelectedMenu('pastries');
+                                                setSelectedMainNav('bakery');
+                                            }}
                                             className={`${active ? 'bg-gray-100' : ''} block px-4 py-2 text-sm cursor-pointer ${selectedMenu === 'pastries' ? 'text-[#35AFA0] font-semibold' : 'text-gray-700'}`}
                                         >
                                             Pastries
@@ -377,7 +403,10 @@ const Navbar = () => {
                                     {({ active }) => (
                                         <Link
                                             to="#"
-                                            onClick={() => setSelectedMenu('cakes')}
+                                            onClick={() => {
+                                                setSelectedMenu('cakes');
+                                                setSelectedMainNav('bakery');
+                                            }}
                                             className={`${active ? 'bg-gray-100' : ''} block px-4 py-2 text-sm cursor-pointer ${selectedMenu === 'cakes' ? 'text-[#35AFA0] font-semibold' : 'text-gray-700'}`}
                                         >
                                             Cakes
@@ -388,7 +417,11 @@ const Navbar = () => {
                         </Menu.Items>
                     </Menu>
                     <Menu as="div" className="relative inline-block">
-                        <Menu.Button className='text-gray-600 hover:text-[#35AFA0] flex items-center gap-1 cursor-pointer'>
+                        <Menu.Button
+                            className={`flex items-center gap-1 cursor-pointer 
+                                ${selectedMainNav === 'beverages' ? 'text-[#35AFA0] font-bold' : 'text-gray-600 font-normal'} 
+                                hover:text-[#35AFA0]`}
+                        >
                             BEVERAGES
                             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
@@ -400,7 +433,10 @@ const Navbar = () => {
                                     {({ active }) => (
                                         <Link
                                             to="#"
-                                            onClick={() => setSelectedMenu('softdrinks')}
+                                            onClick={() => {
+                                                setSelectedMenu('softdrinks');
+                                                setSelectedMainNav('beverages');
+                                            }}
                                             className={`${active ? 'bg-gray-100' : ''} block px-4 py-2 text-sm cursor-pointer ${selectedMenu === 'softdrinks' ? 'text-[#35AFA0] font-semibold' : 'text-gray-700'}`}
                                         >
                                             Soft Drinks
@@ -411,7 +447,10 @@ const Navbar = () => {
                                     {({ active }) => (
                                         <Link
                                             to="#"
-                                            onClick={() => setSelectedMenu('coffee')}
+                                            onClick={() => {
+                                                setSelectedMenu('coffee');
+                                                setSelectedMainNav('beverages');
+                                            }}
                                             className={`${active ? 'bg-gray-100' : ''} block px-4 py-2 text-sm cursor-pointer ${selectedMenu === 'coffee' ? 'text-[#35AFA0] font-semibold' : 'text-gray-700'}`}
                                         >
                                             Coffee & Tea
@@ -422,7 +461,10 @@ const Navbar = () => {
                                     {({ active }) => (
                                         <Link
                                             to="#"
-                                            onClick={() => setSelectedMenu('juices')}
+                                            onClick={() => {
+                                                setSelectedMenu('juices');
+                                                setSelectedMainNav('beverages');
+                                            }}
                                             className={`${active ? 'bg-gray-100' : ''} block px-4 py-2 text-sm cursor-pointer ${selectedMenu === 'juices' ? 'text-[#35AFA0] font-semibold' : 'text-gray-700'}`}
                                         >
                                             Juices
@@ -434,16 +476,18 @@ const Navbar = () => {
                     </Menu>
                     <NavLink
                         to="/blog"
+                        onClick={() => setSelectedMainNav('blog')}
                         className={({ isActive }) =>
-                            `cursor-pointer ${isActive ? 'text-[#35AFA0] font-bold' : 'text-gray-700 font-normal'}`
+                            `cursor-pointer ${selectedMainNav === 'blog' ? 'text-[#35AFA0] font-bold' : 'text-gray-700 font-normal'}`
                         }
                     >
                         BLOG
                     </NavLink>
                     <NavLink
                         to="/contact"
+                        onClick={() => setSelectedMainNav('contact')}
                         className={({ isActive }) =>
-                            `cursor-pointer ${isActive ? 'text-[#35AFA0] font-bold' : 'text-gray-700 font-normal'}`
+                            `cursor-pointer ${selectedMainNav === 'contact' ? 'text-[#35AFA0] font-bold' : 'text-gray-700 font-normal'}`
                         }
                     >
                         CONTACT
