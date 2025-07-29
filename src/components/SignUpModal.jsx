@@ -2,7 +2,7 @@ import React from 'react';
 
 const SignUpModal = ({ onClose }) => {
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-40">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/10 backdrop-blur-sm">
       <div className="bg-white rounded-lg p-6 w-full max-w-md shadow-xl relative">
         <button
           onClick={onClose}
