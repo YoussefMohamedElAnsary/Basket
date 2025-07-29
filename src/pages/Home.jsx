@@ -6,6 +6,7 @@ import DiscountSection from '../components/DiscountSection.jsx'
 import BannerSection from '../components/BannerSection.jsx'
 import BlogSection from '../components/BlogSection.jsx'
 import Newsletter from '../components/Newsletter.jsx'
+import Footer from '../components/Footer.jsx'
 function Home() {
   return (
    <>
@@ -15,7 +16,7 @@ function Home() {
    <DiscountSection /> 
    <BannerSection />
    <BlogSection />
-   <Newsletter/>
+   <Footer />
    </>
   )
 }
