@@ -1,9 +1,12 @@
 import axios from 'axios';
 import React, { useEffect, useState, useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 function Card() {
   const [products, setProducts] = useState([]);
   const scrollRef = useRef(null);
+    const navigate = useNavigate();
+
 
   useEffect(() => {
     axios.get('https://dummyjson.com/products')
@@ -43,7 +46,7 @@ function Card() {
         style={{ scrollBehavior: 'smooth' }}
       >
         {products.map((product) => (
-          <div key={product.id} className="min-w-[250px] max-w-xs w-full border border-gray-200 p-4 relative font-sans bg-white">
+          <div key={product.id} className="min-w-[250px] max-w-xs w-full border border-gray-200 p-4 relative font-sans bg-white" onClick={() => navigate(`/prodect/${product.id}`)}>
             <div className="absolute top-4 left-4 bg-teal-500 text-white text-xs font-semibold rounded-md px-3 py-1 select-none">
               22%
             </div>
