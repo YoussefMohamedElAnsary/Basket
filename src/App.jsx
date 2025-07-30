@@ -7,6 +7,7 @@ import Footer from './components/Footer'
 import SignIn from './components/SignInModal';
 import SignUp from './components/SignUpModal';
 import Checkout from './pages/Checkout';
+import PurchaseOrder from './pages/PurchaseOrder';
 import Blog from './pages/Blog';
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
         <Route path="/signin" element={<SignIn />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/blog" element={<Blog />} />
+        <Route path="/prodect/:id" element={<PurchaseOrder />} />
       </Routes>
     </>
   );
