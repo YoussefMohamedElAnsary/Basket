@@ -475,7 +475,7 @@ const Navbar = () => {
                         </Menu.Items>
                     </Menu>
                     <NavLink
-                        to="/blog"
+                        to="/blog1"
                         onClick={() => setSelectedMainNav('blog')}
                         className={({ isActive }) =>
                             `cursor-pointer ${selectedMainNav === 'blog' ? 'text-[#35AFA0] font-bold' : 'text-gray-700 font-normal'}`
