@@ -1,6 +1,7 @@
  
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
  
 
  
@@ -8,6 +9,8 @@ import React, { useEffect, useState } from 'react';
 function   DiscountSection() {
     const [products, setProducts] = useState([]);
     const [startIndex, setStartIndex] = useState(0);
+      const navigate = useNavigate();
+
     const itemsPerPage =8;
   
     useEffect(() => {
@@ -22,7 +25,7 @@ function   DiscountSection() {
   return (
     <div class="px-[200px]  grid grid-cols-4 gap-0 m-5 ">
         {visibleProducts.map((product) => (
-             <div key={product.id} class="max-w-xs w-full border border-gray-200 p-4 relative font-sans bg-white">
+             <div key={product.id} class="max-w-xs w-full border border-gray-200 p-4 relative font-sans bg-white" onClick={() => navigate(`/prodect/${product.id}`)}>
     
              <div class="absolute top-4 left-4 bg-teal-500 text-white text-xs font-semibold rounded-md px-3 py-1 select-none">
                22%
