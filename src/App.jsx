@@ -8,6 +8,8 @@ import SignIn from './components/SignInModal';
 import SignUp from './components/SignUpModal';
 import Checkout from './pages/Checkout';
 import Blog from './pages/Blog';
+import BlogPage1 from './pages/BlogPage1'
+import BlogPage2 from './pages/BlogPage2'
 
 function App() {
   return (
@@ -21,7 +23,10 @@ function App() {
         <Route path="/signin" element={<SignIn />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/blog" element={<Blog />} />
+        <Route path="/page1" element={<BlogPage1 />} />
+        <Route path="/page2" element={<BlogPage2 />} />
       </Routes>
+
     </>
   );
 }
