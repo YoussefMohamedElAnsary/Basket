@@ -206,7 +206,7 @@ import { CiHeart } from "react-icons/ci";
 import { VscLiveShare } from "react-icons/vsc";
 import { AiOutlineTag } from "react-icons/ai";
 import { useParams } from 'react-router-dom';
-import ProductSlider from '../components/RelatedPorduct';
+// import ProductSlider from '../components/RelatedPorduct';
 import { IoClose } from "react-icons/io5";
 
 
@@ -393,7 +393,7 @@ const PurchaseOrder = () => {
         {/* Related Products */}
         <div className='flex flex-col justify-center items-start w-full mt-8'>
           <h3 className='text-xl font-bold'>Related products</h3>
-          <ProductSlider />
+          {/* <ProductSlider /> */}
         </div>
       </div>
     </section>
