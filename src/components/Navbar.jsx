@@ -35,7 +35,7 @@ const Navbar = () => {
             </div>
 
             {/* Secondary bar */}
-            <div className='bg-white w-full h-8 items-center justify-center px-4 md:px-8 lg:px-32 border-b border-gray-200 hidden md:flex'>
+            <div className='bg-white w-full h-8 items-center justify-center px-4 md:px-8 lg:px-32 border-b border-gray-200 flex md:flex'>
                 <ul className='flex items-center gap-5 text-[12px] mr-auto'>
                     <Link to="/about" className="cursor-pointer">About</Link>
                     <li><Link to="/" className="cursor-pointer">Compare</Link></li>
