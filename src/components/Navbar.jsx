@@ -3,7 +3,7 @@ import secure_delivery_icon from '../assets/secure-delivery-icon.png'
 import nav_logo from '../assets/nav-logo.png'
 import shopping_basket from '../assets/shopping-basket.png'
 import { Menu } from '@headlessui/react'
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import SignInModal from './SignInModal';
 import SignUpModal from './SignUpModal';
 
@@ -12,6 +12,8 @@ const Navbar = () => {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const [isSignInOpen, setIsSignInOpen] = useState(false);
     const [isSignUpOpen, setIsSignUpOpen] = useState(false);
+    const [selectedMenu, setSelectedMenu] = useState('');
+    const [selectedMainNav, setSelectedMainNav] = useState('home');
     useEffect(() => {
     const openSignUp = () => {
         setIsSignUpOpen(true);
@@ -33,11 +35,11 @@ const Navbar = () => {
             </div>
 
             {/* Secondary bar */}
-            <div className='bg-white w-full h-8 items-center justify-center px-4 md:px-8 lg:px-32 border-b border-gray-200 hidden md:flex'>
+            <div className='bg-white w-full h-8 items-center justify-center px-4 md:px-8 lg:px-32 border-b border-gray-200 flex md:flex'>
                 <ul className='flex items-center gap-5 text-[12px] mr-auto'>
-                    <Link to="/about">About</Link>
-                    <li><a href="/">Compare</a></li>
-                    <li><a href="/">Wishlist</a></li>
+                    <Link to="/about" className="cursor-pointer">About</Link>
+                    <li><Link to="/" className="cursor-pointer">Compare</Link></li>
+                    <li><Link to="/" className="cursor-pointer">Wishlist</Link></li>
                 </ul>
                 <div className='flex items-center gap-2 h-full text-[12px]'>
                     <img src={secure_delivery_icon} alt="secure_delivery_icon" className='w-4 h-4' />
@@ -47,7 +49,7 @@ const Navbar = () => {
                         Need help? Call Us: <span className='text-[#35AFA0]'>+ 0020 500</span>
                     </div>
                     <Menu as="div" className="relative inline-block">
-                        <Menu.Button className="inline-flex items-center gap-1 px-2 py-1 text-sm font-medium text-gray-900 hover:bg-gray-50 focus:outline-none">
+                        <Menu.Button className="inline-flex items-center gap-1 px-2 py-1 text-sm font-medium text-gray-900 hover:bg-gray-50 focus:outline-none cursor-pointer">
                             English
                             <svg className="w-4 h-4 text-gray-400" viewBox="0 0 20 20" fill="currentColor">
                                 <path fillRule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clipRule="evenodd" />
@@ -57,30 +59,30 @@ const Navbar = () => {
                             <div className="py-1">
                                 <Menu.Item>
                                     {({ active }) => (
-                                        <a href="#" className={`${active ? 'bg-gray-100' : ''} block px-4 py-2 text-sm text-gray-700`}>
+                                        <Link to="#" className={`${active ? 'bg-gray-100' : ''} block px-4 py-2 text-sm text-gray-700 cursor-pointer`}>
                                             English
-                                        </a>
+                                        </Link>
                                     )}
                                 </Menu.Item>
                                 <Menu.Item>
                                     {({ active }) => (
-                                        <a href="#" className={`${active ? 'bg-gray-100' : ''} block px-4 py-2 text-sm text-gray-700`}>
+                                        <Link to="#" className={`${active ? 'bg-gray-100' : ''} block px-4 py-2 text-sm text-gray-700 cursor-pointer`}>
                                             Spanish
-                                        </a>
+                                        </Link>
                                     )}
                                 </Menu.Item>
                                 <Menu.Item>
                                     {({ active }) => (
-                                        <a href="#" className={`${active ? 'bg-gray-100' : ''} block px-4 py-2 text-sm text-gray-700`}>
+                                        <Link to="#" className={`${active ? 'bg-gray-100' : ''} block px-4 py-2 text-sm text-gray-700 cursor-pointer`}>
                                             French
-                                        </a>
+                                        </Link>
                                     )}
                                 </Menu.Item>
                             </div>
                         </Menu.Items>
                     </Menu>
                     <Menu as="div" className="relative inline-block">
-                        <Menu.Button className="inline-flex items-center gap-1 px-2 py-1 text-sm font-medium text-gray-900 hover:bg-gray-50 focus:outline-none">
+                        <Menu.Button className="inline-flex items-center gap-1 px-2 py-1 text-sm font-medium text-gray-900 hover:bg-gray-50 focus:outline-none cursor-pointer">
                             USD
                             <svg className="w-4 h-4 text-gray-400" viewBox="0 0 20 20" fill="currentColor">
                                 <path fillRule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clipRule="evenodd" />
@@ -90,23 +92,23 @@ const Navbar = () => {
                             <div className="py-1">
                                 <Menu.Item>
                                     {({ active }) => (
-                                        <a href="#" className={`${active ? 'bg-gray-100' : ''} block px-4 py-2 text-sm text-gray-700`}>
+                                        <Link to="#" className={`${active ? 'bg-gray-100' : ''} block px-4 py-2 text-sm text-gray-700 cursor-pointer`}>
                                             USD
-                                        </a>
+                                        </Link>
                                     )}
                                 </Menu.Item>
                                 <Menu.Item>
                                     {({ active }) => (
-                                        <a href="#" className={`${active ? 'bg-gray-100' : ''} block px-4 py-2 text-sm text-gray-700`}>
+                                        <Link to="#" className={`${active ? 'bg-gray-100' : ''} block px-4 py-2 text-sm text-gray-700 cursor-pointer`}>
                                             EUR
-                                        </a>
+                                        </Link>
                                     )}
                                 </Menu.Item>
                                 <Menu.Item>
                                     {({ active }) => (
-                                        <a href="#" className={`${active ? 'bg-gray-100' : ''} block px-4 py-2 text-sm text-gray-700`}>
+                                        <Link to="#" className={`${active ? 'bg-gray-100' : ''} block px-4 py-2 text-sm text-gray-700 cursor-pointer`}>
                                             GBP
-                                        </a>
+                                        </Link>
                                     )}
                                 </Menu.Item>
                             </div>
@@ -151,19 +153,19 @@ const Navbar = () => {
                     <div className="flex items-center gap-4">
                     <button
                         onClick={() => setIsSignInOpen(true)}
-                        className="text-white bg-[#35AFA0] px-4 py-2 rounded-full hover:bg-[#2e998e] transition-all duration-200 text-sm font-medium"
+                        className="text-white bg-[#35AFA0] px-4 py-2 rounded-full hover:bg-[#2e998e] transition-all duration-200 text-sm font-medium cursor-pointer"
                     >
                         Sign In
                     </button>
 
                     <button
                     onClick={() => setIsSignUpOpen(true)}
-                    className="text-[#35AFA0] border border-[#35AFA0] px-4 py-2 rounded-full hover:bg-[#35AFA0] hover:text-white transition-all duration-200 text-sm font-medium"
+                    className="text-[#35AFA0] border border-[#35AFA0] px-4 py-2 rounded-full hover:bg-[#35AFA0] hover:text-white transition-all duration-200 text-sm font-medium cursor-pointer"
                     >
                         Sign Up
                     </button>
                     </div>
-                    <a href="#" className='flex items-center gap-4'>
+                    <Link to="/checkout" className='flex items-center gap-4 cursor-pointer'>
                         <div className='w-8 h-8 lg:w-9 lg:h-9 rounded-full bg-gray-100 flex items-center justify-center'>
                             <svg className="w-4 h-4 lg:w-5 lg:h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
@@ -176,14 +178,14 @@ const Navbar = () => {
                             </div>
                             <span className='absolute -top-2 -right-2 bg-red-500 text-white text-xs w-4 h-4 lg:w-5 lg:h-5 rounded-full flex items-center justify-center'>0</span>
                         </div>
-                    </a>
+                    </Link>
                 </div>
             </div>
 
             {/* Categories and navigation */}
             <div className='bg-white w-full flex flex-col lg:flex-row items-start lg:items-center px-4 md:px-8 lg:px-32 py-6 border-b border-gray-200'>
                 <Menu as="div" className="relative w-full lg:w-auto mb-8 lg:mb-0">
-                    <Menu.Button className="w-full lg:w-[260px] h-[46px] bg-[#35AFA0] text-white rounded-full focus:outline-none relative">
+                    <Menu.Button className="w-full lg:w-[260px] h-[46px] bg-[#35AFA0] text-white rounded-full focus:outline-none relative cursor-pointer">
                         <div className="flex items-center justify-between px-6 h-full">
                             <div className="flex items-center gap-3">
                                 <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -200,37 +202,57 @@ const Navbar = () => {
                         <div className="py-2">
                             <Menu.Item>
                                 {({ active }) => (
-                                    <a href="#" className={`${active ? 'bg-gray-100' : ''} block px-4 py-2 text-sm text-gray-700`}>
+                                    <Link
+                                        to="#"
+                                        onClick={() => setSelectedMenu('fruits')}
+                                        className={`${active ? 'bg-gray-100' : ''} block px-4 py-2 text-sm cursor-pointer ${selectedMenu === 'fruits' ? 'text-[#35AFA0] font-semibold' : 'text-gray-700'}`}
+                                    >
                                         Fruits & Vegetables
-                                    </a>
+                                    </Link>
                                 )}
                             </Menu.Item>
                             <Menu.Item>
                                 {({ active }) => (
-                                    <a href="#" className={`${active ? 'bg-gray-100' : ''} block px-4 py-2 text-sm text-gray-700`}>
+                                    <Link
+                                        to="#"
+                                        onClick={() => setSelectedMenu('meat')}
+                                        className={`${active ? 'bg-gray-100' : ''} block px-4 py-2 text-sm cursor-pointer ${selectedMenu === 'meat' ? 'text-[#35AFA0] font-semibold' : 'text-gray-700'}`}
+                                    >
                                         Meat & Seafood
-                                    </a>
+                                    </Link>
                                 )}
                             </Menu.Item>
                             <Menu.Item>
                                 {({ active }) => (
-                                    <a href="#" className={`${active ? 'bg-gray-100' : ''} block px-4 py-2 text-sm text-gray-700`}>
+                                    <Link
+                                        to="#"
+                                        onClick={() => setSelectedMenu('bakery')}
+                                        className={`${active ? 'bg-gray-100' : ''} block px-4 py-2 text-sm cursor-pointer ${selectedMenu === 'bakery' ? 'text-[#35AFA0] font-semibold' : 'text-gray-700'}`}
+                                    >
                                         Bakery
-                                    </a>
+                                    </Link>
                                 )}
                             </Menu.Item>
                             <Menu.Item>
                                 {({ active }) => (
-                                    <a href="#" className={`${active ? 'bg-gray-100' : ''} block px-4 py-2 text-sm text-gray-700`}>
+                                    <Link
+                                        to="#"
+                                        onClick={() => setSelectedMenu('beverages')}
+                                        className={`${active ? 'bg-gray-100' : ''} block px-4 py-2 text-sm cursor-pointer ${selectedMenu === 'beverages' ? 'text-[#35AFA0] font-semibold' : 'text-gray-700'}`}
+                                    >
                                         Beverages
-                                    </a>
+                                    </Link>
                                 )}
                             </Menu.Item>
                             <Menu.Item>
                                 {({ active }) => (
-                                    <a href="#" className={`${active ? 'bg-gray-100' : ''} block px-4 py-2 text-sm text-gray-700`}>
+                                    <Link
+                                        to="#"
+                                        onClick={() => setSelectedMenu('dairy')}
+                                        className={`${active ? 'bg-gray-100' : ''} block px-4 py-2 text-sm cursor-pointer ${selectedMenu === 'dairy' ? 'text-[#35AFA0] font-semibold' : 'text-gray-700'}`}
+                                    >
                                         Dairy & Eggs
-                                    </a>
+                                    </Link>
                                 )}
                             </Menu.Item>
                         </div>
@@ -260,11 +282,30 @@ const Navbar = () => {
 
                 {/* Mobile menu */}
                 <nav className={`${isMobileMenuOpen ? 'flex' : 'hidden'} lg:flex flex-col lg:flex-row w-full lg:w-auto lg:items-center gap-4 lg:gap-8 lg:ml-10`}>
-                    <Link to="/" className='text-[#35AFA0] font-medium'>HOME</Link>
-                    <Link to="/shop" className='text-gray-600 hover:text-[#35AFA0]'>SHOP</Link>
-
-                     <Menu as="div" className="relative inline-block">
-                        <Menu.Button className='text-gray-600 hover:text-[#35AFA0] flex items-center gap-1'>
+                    <NavLink
+                        to="/"
+                        onClick={() => setSelectedMainNav('home')}
+                        className={({ isActive }) =>
+                            `cursor-pointer ${selectedMainNav === 'home' ? 'text-[#35AFA0] font-bold' : 'text-gray-700 font-normal'}`
+                        }
+                    >
+                        HOME
+                    </NavLink>
+                    <NavLink
+                        to="/shop"
+                        onClick={() => setSelectedMainNav('shop')}
+                        className={({ isActive }) =>
+                            `cursor-pointer ${selectedMainNav === 'shop' ? 'text-[#35AFA0] font-bold' : 'text-gray-700 font-normal'}`
+                        }
+                    >
+                        SHOP
+                    </NavLink>
+                    <Menu as="div" className="relative inline-block">
+                        <Menu.Button
+                            className={`flex items-center gap-1 cursor-pointer 
+                                ${selectedMainNav === 'meats' ? 'text-[#35AFA0] font-bold' : 'text-gray-600 font-normal'} 
+                                hover:text-[#35AFA0]`}
+                        >
                             MEATS & SEAFOOD
                             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
@@ -274,30 +315,55 @@ const Navbar = () => {
                             <div className="py-2">
                                 <Menu.Item>
                                     {({ active }) => (
-                                        <a href="#" className={`${active ? 'bg-gray-100' : ''} block px-4 py-2 text-sm text-gray-700`}>
+                                        <Link
+                                            to="#"
+                                            onClick={() => {
+                                                setSelectedMenu('freshmeat');
+                                                setSelectedMainNav('meats');
+                                            }}
+                                            className={`${active ? 'bg-gray-100' : ''} block px-4 py-2 text-sm cursor-pointer ${selectedMenu === 'freshmeat' ? 'text-[#35AFA0] font-semibold' : 'text-gray-700'}`}
+                                        >
                                             Fresh Meat
-                                        </a>
+                                        </Link>
                                     )}
                                 </Menu.Item>
                                 <Menu.Item>
                                     {({ active }) => (
-                                        <a href="#" className={`${active ? 'bg-gray-100' : ''} block px-4 py-2 text-sm text-gray-700`}>
+                                        <Link
+                                            to="#"
+                                            onClick={() => {
+                                                setSelectedMenu('fish');
+                                                setSelectedMainNav('meats');
+                                            }}
+                                            className={`${active ? 'bg-gray-100' : ''} block px-4 py-2 text-sm cursor-pointer ${selectedMenu === 'fish' ? 'text-[#35AFA0] font-semibold' : 'text-gray-700'}`}
+                                        >
                                             Fish
-                                        </a>
+                                        </Link>
                                     )}
                                 </Menu.Item>
                                 <Menu.Item>
                                     {({ active }) => (
-                                        <a href="#" className={`${active ? 'bg-gray-100' : ''} block px-4 py-2 text-sm text-gray-700`}>
+                                        <Link
+                                            to="#"
+                                            onClick={() => {
+                                                setSelectedMenu('shellfish');
+                                                setSelectedMainNav('meats');
+                                            }}
+                                            className={`${active ? 'bg-gray-100' : ''} block px-4 py-2 text-sm cursor-pointer ${selectedMenu === 'shellfish' ? 'text-[#35AFA0] font-semibold' : 'text-gray-700'}`}
+                                        >
                                             Shellfish
-                                        </a>
+                                        </Link>
                                     )}
                                 </Menu.Item>
                             </div>
                         </Menu.Items>
                     </Menu>
                     <Menu as="div" className="relative inline-block">
-                        <Menu.Button className='text-gray-600 hover:text-[#35AFA0] flex items-center gap-1'>
+                        <Menu.Button
+                            className={`flex items-center gap-1 cursor-pointer 
+                                ${selectedMainNav === 'bakery' ? 'text-[#35AFA0] font-bold' : 'text-gray-600 font-normal'} 
+                                hover:text-[#35AFA0]`}
+                        >
                             BAKERY
                             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
@@ -307,30 +373,55 @@ const Navbar = () => {
                             <div className="py-2">
                                 <Menu.Item>
                                     {({ active }) => (
-                                        <a href="#" className={`${active ? 'bg-gray-100' : ''} block px-4 py-2 text-sm text-gray-700`}>
+                                        <Link
+                                            to="#"
+                                            onClick={() => {
+                                                setSelectedMenu('bread');
+                                                setSelectedMainNav('bakery');
+                                            }}
+                                            className={`${active ? 'bg-gray-100' : ''} block px-4 py-2 text-sm cursor-pointer ${selectedMenu === 'bread' ? 'text-[#35AFA0] font-semibold' : 'text-gray-700'}`}
+                                        >
                                             Bread
-                                        </a>
+                                        </Link>
                                     )}
                                 </Menu.Item>
                                 <Menu.Item>
                                     {({ active }) => (
-                                        <a href="#" className={`${active ? 'bg-gray-100' : ''} block px-4 py-2 text-sm text-gray-700`}>
+                                        <Link
+                                            to="#"
+                                            onClick={() => {
+                                                setSelectedMenu('pastries');
+                                                setSelectedMainNav('bakery');
+                                            }}
+                                            className={`${active ? 'bg-gray-100' : ''} block px-4 py-2 text-sm cursor-pointer ${selectedMenu === 'pastries' ? 'text-[#35AFA0] font-semibold' : 'text-gray-700'}`}
+                                        >
                                             Pastries
-                                        </a>
+                                        </Link>
                                     )}
                                 </Menu.Item>
                                 <Menu.Item>
                                     {({ active }) => (
-                                        <a href="#" className={`${active ? 'bg-gray-100' : ''} block px-4 py-2 text-sm text-gray-700`}>
+                                        <Link
+                                            to="#"
+                                            onClick={() => {
+                                                setSelectedMenu('cakes');
+                                                setSelectedMainNav('bakery');
+                                            }}
+                                            className={`${active ? 'bg-gray-100' : ''} block px-4 py-2 text-sm cursor-pointer ${selectedMenu === 'cakes' ? 'text-[#35AFA0] font-semibold' : 'text-gray-700'}`}
+                                        >
                                             Cakes
-                                        </a>
+                                        </Link>
                                     )}
                                 </Menu.Item>
                             </div>
                         </Menu.Items>
                     </Menu>
                     <Menu as="div" className="relative inline-block">
-                        <Menu.Button className='text-gray-600 hover:text-[#35AFA0] flex items-center gap-1'>
+                        <Menu.Button
+                            className={`flex items-center gap-1 cursor-pointer 
+                                ${selectedMainNav === 'beverages' ? 'text-[#35AFA0] font-bold' : 'text-gray-600 font-normal'} 
+                                hover:text-[#35AFA0]`}
+                        >
                             BEVERAGES
                             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
@@ -340,29 +431,50 @@ const Navbar = () => {
                             <div className="py-2">
                                 <Menu.Item>
                                     {({ active }) => (
-                                        <a href="#" className={`${active ? 'bg-gray-100' : ''} block px-4 py-2 text-sm text-gray-700`}>
+                                        <Link
+                                            to="#"
+                                            onClick={() => {
+                                                setSelectedMenu('softdrinks');
+                                                setSelectedMainNav('beverages');
+                                            }}
+                                            className={`${active ? 'bg-gray-100' : ''} block px-4 py-2 text-sm cursor-pointer ${selectedMenu === 'softdrinks' ? 'text-[#35AFA0] font-semibold' : 'text-gray-700'}`}
+                                        >
                                             Soft Drinks
-                                        </a>
+                                        </Link>
                                     )}
                                 </Menu.Item>
                                 <Menu.Item>
                                     {({ active }) => (
-                                        <a href="#" className={`${active ? 'bg-gray-100' : ''} block px-4 py-2 text-sm text-gray-700`}>
+                                        <Link
+                                            to="#"
+                                            onClick={() => {
+                                                setSelectedMenu('coffee');
+                                                setSelectedMainNav('beverages');
+                                            }}
+                                            className={`${active ? 'bg-gray-100' : ''} block px-4 py-2 text-sm cursor-pointer ${selectedMenu === 'coffee' ? 'text-[#35AFA0] font-semibold' : 'text-gray-700'}`}
+                                        >
                                             Coffee & Tea
-                                        </a>
+                                        </Link>
                                     )}
                                 </Menu.Item>
                                 <Menu.Item>
                                     {({ active }) => (
-                                        <a href="#" className={`${active ? 'bg-gray-100' : ''} block px-4 py-2 text-sm text-gray-700`}>
+                                        <Link
+                                            to="#"
+                                            onClick={() => {
+                                                setSelectedMenu('juices');
+                                                setSelectedMainNav('beverages');
+                                            }}
+                                            className={`${active ? 'bg-gray-100' : ''} block px-4 py-2 text-sm cursor-pointer ${selectedMenu === 'juices' ? 'text-[#35AFA0] font-semibold' : 'text-gray-700'}`}
+                                        >
                                             Juices
-                                        </a>
+                                        </Link>
                                     )}
                                 </Menu.Item>
                             </div>
                         </Menu.Items>
                     </Menu>
-                    <Link to="/blog" className='text-gray-600 hover:text-[#35AFA0]'>BLOG</Link>
+                    <a href="#" className='text-gray-600 hover:text-[#35AFA0]'>BLOG</a>
                     <Link to="/contact" className='text-gray-600 hover:text-[#35AFA0]'>Contact</Link>
                     {isSignInOpen && <SignInModal onClose={() => setIsSignInOpen(false)} />}
                     {isSignUpOpen && <SignUpModal onClose={() => setIsSignUpOpen(false)} />}

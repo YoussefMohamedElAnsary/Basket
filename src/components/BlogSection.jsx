@@ -2,7 +2,7 @@ import React from 'react'
 import { banner4,banner5,banner6 } from '../assets';
 
  
-import Blog from './blog';
+import Blog from './Blog';
 function BlogSection() {
   return (
     <div className="flex   justify-center gap-6 flex-wrap p-6 mx-auto">

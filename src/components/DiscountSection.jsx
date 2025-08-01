@@ -1,6 +1,7 @@
  
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
  
 
  
@@ -8,6 +9,8 @@ import React, { useEffect, useState } from 'react';
 function   DiscountSection() {
     const [products, setProducts] = useState([]);
     const [startIndex, setStartIndex] = useState(0);
+      const navigate = useNavigate();
+
     const itemsPerPage =8;
   
     useEffect(() => {
