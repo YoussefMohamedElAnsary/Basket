@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
-import secure_delivery_icon from '../assets/nav-assets/secure-delivery-icon.png'
-import nav_logo from '../assets/nav-assets/nav-logo.png'
-import shopping_basket from '../assets/nav-assets/shopping-basket.png'
+import secure_delivery_icon from '../assets/secure-delivery-icon.png'
+import nav_logo from '../assets/nav-logo.png'
+import shopping_basket from '../assets/shopping-basket.png'
 import { Menu } from '@headlessui/react'
 import { Link } from 'react-router-dom';
 import SignInModal from './SignInModal';
@@ -260,9 +260,10 @@ const Navbar = () => {
 
                 {/* Mobile menu */}
                 <nav className={`${isMobileMenuOpen ? 'flex' : 'hidden'} lg:flex flex-col lg:flex-row w-full lg:w-auto lg:items-center gap-4 lg:gap-8 lg:ml-10`}>
-                    <a href="#" className='text-[#35AFA0] font-medium'>HOME</a>
-                    <a href="#" className='text-gray-600 hover:text-[#35AFA0]'>SHOP</a>
-                    <Menu as="div" className="relative inline-block">
+                    <Link to="/" className='text-[#35AFA0] font-medium'>HOME</Link>
+                    <Link to="/shop" className='text-gray-600 hover:text-[#35AFA0]'>SHOP</Link>
+
+                     <Menu as="div" className="relative inline-block">
                         <Menu.Button className='text-gray-600 hover:text-[#35AFA0] flex items-center gap-1'>
                             MEATS & SEAFOOD
                             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -361,7 +362,7 @@ const Navbar = () => {
                             </div>
                         </Menu.Items>
                     </Menu>
-                    <a href="#" className='text-gray-600 hover:text-[#35AFA0]'>BLOG</a>
+                    <Link to="/blog" className='text-gray-600 hover:text-[#35AFA0]'>BLOG</Link>
                     <Link to="/contact" className='text-gray-600 hover:text-[#35AFA0]'>Contact</Link>
                     {isSignInOpen && <SignInModal onClose={() => setIsSignInOpen(false)} />}
                     {isSignUpOpen && <SignUpModal onClose={() => setIsSignUpOpen(false)} />}

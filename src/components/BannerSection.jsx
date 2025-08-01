@@ -15,14 +15,14 @@ function BannerSection() {
       />
       <Banner
         discount="Weekend Discount 40%"
-        title="Natural Eggs"
-        subtitle="Eat one every day"
+        title="Taste the Best"
+        subtitle="Shine the morning"
         buttonText="Shop Now"
         imgSrc={banner2}      />
       <Banner
         discount="Weekend Discount 40%"
-        title="Natural Eggs"
-        subtitle="Eat one every day"
+        title="Ditch the Junk"
+        subtitle="Breakfast made better"
         buttonText="Shop Now"
         imgSrc={banner3}      />
     </div>

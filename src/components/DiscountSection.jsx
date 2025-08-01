@@ -20,9 +20,9 @@ function   DiscountSection() {
   
     const visibleProducts = products.slice(0, 0 + itemsPerPage);
   return (
-    <div class="px-[200px]  grid grid-cols-4 gap-0 m-5 ">
+    <div class="px-[210px] mx-auto  grid grid-cols-5 gap-0 rounded-sm ">
         {visibleProducts.map((product) => (
-             <div key={product.id} class="max-w-xs w-full border border-gray-200 p-4 relative font-sans bg-white">
+             <div key={product.id} class="max-w-xs w-full border rounded-sm border-gray-200 p-4 relative font-sans bg-white">
     
              <div class="absolute top-4 left-4 bg-teal-500 text-white text-xs font-semibold rounded-md px-3 py-1 select-none">
                22%
@@ -39,12 +39,12 @@ function   DiscountSection() {
              </div>
          
            
-             <h2 class="text-gray-900 text-l font-medium leading-snug mb-1">
+             <h2 class="text-gray-900 text-sm font-medium leading-snug mb-1">
              {product.title}
              </h2>
          
           
-             <p class="text-green-600 text-xs font-semibold mb-3 tracking-wide select-none">IN STOCK</p>
+             <p class="text-green-600 text-xs font-semibold mb-3 tracking-wide select-none">{product.availabilityStatus}</p>
          
             
              <div class="flex items-center space-x-2 mb-4">
@@ -55,13 +55,13 @@ function   DiscountSection() {
                  <svg class="w-4 h-4 fill-current" viewBox="0 0 20 20" aria-hidden="true"><path d="M10 15l-5.878 3.09 1.123-6.545L.49 6.91l6.562-.955L10 0l2.948 5.955 6.561.955-4.755 4.635 1.124 6.545z"/></svg>
                  <svg class="w-4 h-4 text-gray-300 fill-current" viewBox="0 0 20 20" aria-hidden="true"><path d="M10 15l-5.878 3.09 1.123-6.545L.49 6.91l6.562-.955L10 0l2.948 5.955 6.561.955-4.755 4.635 1.124 6.545z"/></svg>
                </div>
-               <a href="#" class="text-sm text-slate-600 hover:underline select-none">1 review</a>
+               <a href="#" class="text-sm text-slate-600 hover:underline select-none">{product.rating}</a>
              </div>
          
             
              <div class="mb-6">
-               <span class="line-through text-gray-400 text-sm mr-2 select-none">$9.35</span>
-               <span class="text-xl font-bold text-rose-600 select-none">$7.25</span>
+               <span class="line-through text-gray-400 text-sm mr-2 select-none"> ${(product.price + product.price * product.discountPercentage / 100).toFixed(2)}</span>
+               <span class="text-xl font-bold text-rose-600 select-none"> ${product.price}</span>
              </div>
           
            </div>

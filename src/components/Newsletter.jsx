@@ -3,7 +3,7 @@ import newsletter from "../assets/newsletter.png";
 
 export default function Newsletter() {
   return (
-    <div className="overflow-hidden bg-teal-600 text-white sm:px-12 md:px-20 flex flex-col md:flex-row items-center justify-around  md:gap-16">
+    <div className="overflow-hidden bg-teal-600 text-white sm:px-12 md:px-20 flex  md:flex-row items-center justify-around  md:gap-16">
       
       {/* Text and Form */}
       <div className="max-w-xl z-10">
@@ -35,11 +35,11 @@ export default function Newsletter() {
       </div>
 
       {/* Optimized Image */}
-      <div className="h-[580px] md:w-72 md:h-72">
+      <div className=" md:w-72 md:h-72">
         <img
           src={newsletter}
           alt="Newsletter"
-          className="w-full h-full object-contain max-w-[380px] h-[580px] "
+          className="w-full h-full object-contain  "
         />
       </div>
     </div>
