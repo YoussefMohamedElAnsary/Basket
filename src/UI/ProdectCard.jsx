@@ -40,11 +40,15 @@
 
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useCart } from '../contexts/CartContext';
+import { useAuth } from '../contexts/AuthContext';
 
 const ProductCard = () => {
   const [products, setProducts] = useState([]);
-    const navigate = useNavigate();
-
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
+  const { addToCart } = useCart();
+  const { currentUser } = useAuth();
 
   useEffect(() => {
     fetch('https://dummyjson.com/products')
@@ -53,13 +57,35 @@ const ProductCard = () => {
       .catch(err => console.error('Error fetching products:', err));
   }, []);
 
+  const handleAddToCart = async (item) => {
+    if (!currentUser) {
+      alert('Please sign in to add items to cart');
+      return;
+    }
+
+    setLoading(true);
+    try {
+      await addToCart({
+        id: item.id,
+        title: item.title,
+        price: item.price,
+        thumbnail: item.thumbnail,
+        discountPercentage: item.discountPercentage
+      });
+      alert('Item added to cart!');
+    } catch (error) {
+      console.error('Error adding to cart:', error);
+      alert('Failed to add item to cart');
+    }
+    setLoading(false);
+  };
+
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-4 w-full">
       {products.map((item) => (
         <div
           key={item.id}
           className="flex flex-col justify-center items-start border-2 border-gray-100 p-8 rounded-md relative lg-w-[230px] w-full bg-white shadow-lg hover:shadow-xl cursor-pointer transition-shadow duration-300 ease-in-out"
-          onClick={() => navigate(`/prodect/${item.id}`)}
         >
           {/* Discount Badge */}
           <div className="absolute top-5 left-3 bg-[#35AFA0] text-white text-[12px] font-[600] px-3.5 py-2.5 rounded-md">
@@ -72,12 +98,18 @@ const ProductCard = () => {
           <img
             src={item.thumbnail}
             alt={item.title}
-            className="w-full h-[188px] object-cover mb-4 rounded-md"
+            className="w-full h-[188px] object-cover mb-4 rounded-md cursor-pointer"
             loading='lazy'
+            onClick={() => navigate(`/prodect/${item.id}`)}
           />
 
           {/* Title */}
-          <p className="text-[18px] font-semibold mb-2">{item.title}</p>
+          <p 
+            className="text-[18px] font-semibold mb-2 cursor-pointer hover:text-[#35AFA0]"
+            onClick={() => navigate(`/prodect/${item.id}`)}
+          >
+            {item.title}
+          </p>
 
           {/* Stock Status */}
           <p className="text-[11px] uppercase text-[#00B853]">In stock</p>
@@ -102,6 +134,15 @@ const ProductCard = () => {
               ${item.price}
             </p>
           </div>
+
+          {/* Add to Cart Button */}
+          <button
+            onClick={() => handleAddToCart(item)}
+            disabled={loading}
+            className="w-full mt-4 bg-[#35AFA0] text-white py-2 px-4 rounded-md hover:bg-[#2e998e] transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+          >
+            {loading ? 'Adding...' : 'Add to Cart'}
+          </button>
         </div>
       ))}
     </div>
