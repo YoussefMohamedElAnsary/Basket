@@ -16,7 +16,7 @@ const Blog = ({title, category, date, imgSrc }) => {
   <p className="text-gray-400   font-medium uppercase tracking-wide text-sm">
     {category}
   </p>
-  <h2 className="mt-1 font-bold text-black text-xl leading-tight">
+  <h2 className="mt-1 font-bold text-black text-l leading-tight">
     {title}
   </h2>
   <p className="mt-2 text-gray-400 font-medium text-sm">{date}</p>

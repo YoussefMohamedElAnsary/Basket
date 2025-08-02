@@ -5,6 +5,7 @@ import banner4 from './banner4.png';
 import banner5 from './banner5.png';
 import banner6 from './banner6.png';
 import newsletter from './newsletter.png';
+import bacola_banner from './bacola-banner.jpg';
 export{
     banner1,
     banner2,
@@ -12,6 +13,6 @@ export{
     banner4,
     banner5,
     banner6,
-    newsletter
-    
+    newsletter,
+    bacola_banner    
 }

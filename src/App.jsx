@@ -6,14 +6,12 @@ import Navbar from './components/Navbar';
 import Home from './pages/Home';
 import About from './pages/About';
 import Contact from './pages/Contact';
-import Footer from './components/Footer'
 import SignIn from './components/SignIn';
 import SignUp from './components/SignUp';
 import Checkout from './pages/Checkout';
 import PurchaseOrder from './pages/PurchaseOrder';
 import BlogPage1 from './pages/BlogPage1'
 import BlogPage2 from './pages/BlogPage2'
-import Products from './pages/Products';
 
 function App() {
   return (
@@ -25,7 +23,8 @@ function App() {
             <Routes>
               <Route path="/checkout" element={<Checkout />} />
               <Route path="/" element={<Home />} />
-              <Route path="/about" element={<About />} />
+              <Route path="/shop" element={<Shop />} />
+        <Route path="/about" element={<About />} />
               <Route path="/contact" element={<Contact />} />
               <Route path="/signin" element={<SignIn />} />
                           <Route path="/signup" element={<SignUp />} />
@@ -37,8 +36,7 @@ function App() {
             <Footer />
           </ProductProvider>
         </CartProvider>
-      </AuthProvider>
-    </Router>
+      </AuthProvider>    </Router>
   );
 }
 

@@ -1,12 +1,9 @@
+
 import axios from 'axios';
 import React, { useEffect, useState, useRef } from 'react';
-import { useNavigate } from 'react-router-dom';
 
-function Card() {
+function ProductSection() {
   const [products, setProducts] = useState([]);
-  const scrollRef = useRef(null);
-    const navigate = useNavigate();
-
 
   useEffect(() => {
     axios.get('https://dummyjson.com/products')
@@ -14,41 +11,16 @@ function Card() {
       .catch(err => console.error('Error fetching data:', err));
   }, []);
 
-  const scrollLeft = () => {
-    scrollRef.current.scrollBy({ left: -300, behavior: 'smooth' });
-  };
+  console.log(products)
 
-  const scrollRight = () => {
-    scrollRef.current.scrollBy({ left: 300, behavior: 'smooth' });
-  };
 
   return (
-    <div className="relative px-[210px] mx-auto w-full ">
-      {/* Arrows */}
-      <button
-        onClick={scrollLeft}
-        className="absolute left-0 top-1/2 transform -translate-y-1/2 z-10 bg-white shadow p-2 rounded-full"
-      >
-        &lt;
-      </button>
-
-      <button
-        onClick={scrollRight}
-        className="absolute right-0 top-1/2 transform -translate-y-1/2 z-10 bg-white shadow p-2 rounded-full"
-      >
-        &gt;
-      </button>
-
-      {/* Scrollable Row */}
-      <div
-        ref={scrollRef}
-        className="flex overflow-x-auto  scrollbar-hide py-4 px-8"
-        style={{ scrollBehavior: 'smooth' }}
-      >
+    <div className="relative w-full  grid grid-cols-4 gap-0 m-4 ">
+      
         {products.map((product) => (
-          <div key={product.id} className="min-w-[250px] max-w-xs w-full border border-gray-200 p-4 relative font-sans bg-white" onClick={() => navigate(`/prodect/${product.id}`)}>
+          <div key={product.id} className="min-w-[250px] max-w-xs w-full border border-gray-200 p-4 relative font-sans bg-white">
             <div className="absolute top-4 left-4 bg-teal-500 text-white text-xs font-semibold rounded-md px-3 py-1 select-none">
-              22%
+              %{product.discountPercentage}
             </div>
 
             <div className="flex justify-center mb-2">
@@ -60,11 +32,11 @@ function Card() {
               />
             </div>
 
-            <h2 className="text-gray-900 text-sm font-medium leading-snug mb-1">
+            <h2 className="text-gray-900 text-l font-medium leading-snug mb-1">
               {product.title}
             </h2>
 
-            <p className="text-green-600 text-xs font-semibold mb-3 tracking-wide select-none"> {product.availabilityStatus}</p>
+            <p className="text-green-600 text-xs font-semibold mb-3 tracking-wide select-none">{product.availabilityStatus}</p>
 
             <div className="flex items-center space-x-2 mb-4">
               <div className="flex space-x-1 text-yellow-400">
@@ -81,7 +53,8 @@ function Card() {
             </div>
 
             <div className="mb-6">
-              <span className="line-through text-gray-400 text-sm mr-2 select-none">${(product.price + product.price * product.discountPercentage / 100).toFixed(2)}</span>
+              <span className="line-through text-gray-400 text-sm mr-2 select-none">              ${(product.price + product.price * product.discountPercentage / 100).toFixed(2)}
+</span>
               <span className="text-xl font-bold text-rose-600 select-none">${product.price}</span>
             </div>
 
@@ -94,8 +67,8 @@ function Card() {
           </div>
         ))}
       </div>
-    </div>
+    
   );
 }
 
-export default Card;
+export default ProductSection;

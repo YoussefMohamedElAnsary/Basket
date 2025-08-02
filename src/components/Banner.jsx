@@ -9,13 +9,13 @@ const Banner = ({ discount, title, subtitle, buttonText, imgSrc }) => {
     >
       <div className="absolute inset-0 bg-black/5"></div> {/* Overlay */}
       <div className="relative p-6 z-10">
-        <p className="text-green-400 font-semibold uppercase tracking-wide text-sm">
+        <p className="text-green-400 font-medium uppercase tracking-wide text-sm">
           {discount}
         </p>
-        <h2 className="mt-1 font-bold text-black text-2xl leading-tight">
+        <h2 className="mt-1 font-bold text-black text-xl leading-tight">
           {title}
         </h2>
-        <p className="mt-2 text-gray-400 text-sm">{subtitle}</p>
+        <p className="mt-2 text-gray-500 text-sm">{subtitle}</p>
         <button
           className="mt-4 bg-white text-gray-800 rounded-xl py-2 px-6 text-sm font-semibold hover:bg-black hover:text-white  transition-colors"
           aria-label={`Shop now for ${title}`}
