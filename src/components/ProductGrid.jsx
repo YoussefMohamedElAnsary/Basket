@@ -1,10 +1,12 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useCart } from '../contexts/CartContext';
+import { useNavigate } from 'react-router-dom';
 
 const ProductGrid = () => {
   const [products, setProducts] = useState([]);
   const { addToCart, updateQuantity, getCartItemQuantity } = useCart();
+    const navigate = useNavigate();
 
   useEffect(() => {
     axios.get('https://dummyjson.com/products')
@@ -41,7 +43,7 @@ const ProductGrid = () => {
   return (
     <div className="relative  grid grid-cols-4 gap-0 p-5">
       {products.map((product) => (
-        <div key={product.id} className="min-w-[220px] max-w-xs w-full border border-gray-200 p-5 relative font-sans bg-white">
+        <div key={product.id}  className="min-w-[220px] max-w-xs w-full border border-gray-200 p-5 relative font-sans bg-white cursor-pointer" onClick={() => navigate(`/prodect/${product.id}`)}>
           <div className="absolute top-4 left-4 bg-teal-500 text-white text-xs font-semibold rounded-md px-3 py-1 select-none">
             %{product.discountPercentage}
           </div>
