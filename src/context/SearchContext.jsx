@@ -18,7 +18,6 @@ export const SearchProvider = ({ children }) => {
   const [isSearching, setIsSearching] = useState(false);
   const [searchHistory, setSearchHistory] = useState([]);
 
-  // Fetch all products on component mount
   useEffect(() => {
     const fetchProducts = async () => {
       try {

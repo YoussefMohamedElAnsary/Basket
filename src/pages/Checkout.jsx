@@ -1,11 +1,43 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { useAuth } from '../contexts/AuthContext';
+import { useCart } from '../contexts/CartContext';
 import camera from '../assets/checkout-assets/camera-icon.png'
 import ItemCardCheckout from '../components/ItemCardCheckout'
-import chips from '../assets/checkout-assets/chips.png'
 
 function Checkout() {
     const [shipping, setShipping] = useState('standard');
+    const { currentUser } = useAuth();
+    const { cart, getTotalPrice, clearCart } = useCart();
+    const navigate = useNavigate();
+
+    if (!currentUser) {
+        return (
+            <div className="min-h-screen flex items-center justify-center bg-gray-50">
+                <div className="text-center">
+                    <h2 className="text-2xl font-bold mb-4">Please Sign In</h2>
+                    <p className="text-gray-600 mb-4">You need to be signed in to checkout.</p>
+                    <Link to="/signin" className="text-blue-600 hover:text-blue-800 underline">
+                        Go to Sign In
+                    </Link>
+                </div>
+            </div>
+        );
+    }
+
+    if (cart.length === 0) {
+        return (
+            <div className="min-h-screen flex items-center justify-center bg-gray-50">
+                <div className="text-center">
+                    <h2 className="text-2xl font-bold mb-4">Your Cart is Empty</h2>
+                    <p className="text-gray-600 mb-4">Add some items to your cart before checkout.</p>
+                    <Link to="/shop" className="text-blue-600 hover:text-blue-800 underline">
+                        Continue Shopping
+                    </Link>
+                </div>
+            </div>
+        );
+    }
 
     return (
         <div className="flex flex-col md:flex-row min-h-screen p-10 ">
@@ -15,11 +47,16 @@ function Checkout() {
                         <h3 className='text-2xl font-bold'>
                             Contact
                         </h3>
-                        <Link to="/" className='text-sm text-blue-500 underline'>
-                            Log in
-                        </Link>
+                        <span className='text-sm text-green-600'>
+                            ✓ Signed in as {currentUser.email}
+                        </span>
                     </div>
-                    <input type="text" placeholder='Email or mobile phone number' className='w-full px-2 py-3 border border-gray-300 rounded-md outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 text-sm' />
+                    <input 
+                        type="text" 
+                        value={currentUser.email}
+                        readOnly
+                        className='w-full px-2 py-3 border border-gray-300 rounded-md outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 text-sm bg-gray-50' 
+                    />
                     <div className='flex items-center gap-2 mt-3'>
                         <input type="checkbox" className='w-4 h-4' />
                         <span className='text-sm'>
@@ -103,9 +140,17 @@ function Checkout() {
                         <img src={camera} alt="camera" className='w-15' />
                         <span className='text-sm text-gray-500'>This store can’t accept payments right now.</span>
                     </div>
-                    <div className='flex gap-2 py-5 px-15 bg-gray-100 rounded-md items-center justify-center mb-20'>
+                    <button 
+                        onClick={() => {
+                            // Here you would typically integrate with a payment processor
+                            alert('Order placed successfully! This is a demo - no actual payment processed.');
+                            clearCart();
+                            navigate('/');
+                        }}
+                        className='flex gap-2 py-5 px-15 bg-blue-600 hover:bg-blue-700 text-white rounded-md items-center justify-center mb-20 cursor-pointer transition-colors'
+                    >
                         Pay now
-                    </div>
+                    </button>
                 </div>
                 <div className='h-[1px] w-[82%] bg-gray-200 mx-auto'></div>
                 <Link className='px-15 text-blue-500 underline mt-3'>Privacy policy</Link>
@@ -113,17 +158,23 @@ function Checkout() {
             <section className="flex flex-col pt-10 border-t-2  w-full md:w-1/2 md:border-r-2 md:border-l-0 md:border-t-0 md:border-b-0 border-gray-200 p-6">
                 <div className='flex flex-col px-15'>
                     <div className='flex flex-col gap-3'>
-                        <ItemCardCheckout img={chips} title="Bag of chips" price={100} quantity={1} />
-                        <ItemCardCheckout img={chips} title="Bag of chips" price={100} quantity={1} />
-                        <ItemCardCheckout img={chips} title="Bag of chips" price={100} quantity={1} />
+                        {cart.map((item) => (
+                            <ItemCardCheckout 
+                                key={item.id}
+                                img={item.image} 
+                                title={item.name} 
+                                price={item.price} 
+                                quantity={item.quantity} 
+                            />
+                        ))}
                     </div>
                     <div className='flex flex-col gap-3 mt-10'>
                         <div className='flex flex-row items-center justify-between'>
                             <span className='text-md text-black'>
-                                Subtotal - 3 items
+                                Subtotal - {cart.length} items
                             </span>
                             <span className='text-md text-black'>
-                                $100.00
+                                ${getTotalPrice().toFixed(2)}
                             </span>
                         </div>
                         <div className='flex flex-row items-center justify-between'>
@@ -131,7 +182,7 @@ function Checkout() {
                                 Shipping
                             </span>
                             <span className='text-md text-black'>
-                                Free
+                                {shipping === 'standard' ? 'Free' : '$9.99'}
                             </span>
                         </div>
                         <div className='flex flex-row items-center justify-between'>
@@ -139,11 +190,13 @@ function Checkout() {
                                 Total
                             </span>
                             <span className='text-md text-gray-500'>
-                                USD <span className='text-xl font-bold text-black'>$100.00</span> 
+                                USD <span className='text-xl font-bold text-black'>
+                                    ${(getTotalPrice() + (shipping === 'express' ? 9.99 : 0)).toFixed(2)}
+                                </span> 
                             </span>
                         </div>
                         <span className='text-md text-gray-500'>
-                            including $2.46 in taxes
+                            including ${(getTotalPrice() * 0.08).toFixed(2)} in taxes
                         </span>
                     </div>
                 </div>

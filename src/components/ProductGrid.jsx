@@ -1,36 +1,41 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
+import { useCart } from '../contexts/CartContext';
 
 const ProductGrid = () => {
   const [products, setProducts] = useState([]);
-  const [counts, setCounts] = useState({}); // Store counts per product ID
+  const { addToCart, updateQuantity, getCartItemQuantity } = useCart();
 
   useEffect(() => {
     axios.get('https://dummyjson.com/products')
       .then(res => {
         setProducts(res.data.products);
-        // Initialize counters for each product to 0
-        const initialCounts = {};
-        res.data.products.forEach(p => {
-          initialCounts[p.id] = 0;
-        });
-        setCounts(initialCounts);
       })
       .catch(err => console.error('Error fetching data:', err));
   }, []);
 
-  const increment = (id) => {
-    setCounts(prev => ({
-      ...prev,
-      [id]: prev[id] + 1,
-    }));
+  const increment = (product) => {
+    const currentQuantity = getCartItemQuantity(product.id);
+    if (currentQuantity === 0) {
+      // Add to cart if not already there
+      addToCart({
+        id: product.id,
+        name: product.title,
+        price: product.price,
+        image: product.thumbnail,
+        quantity: 1
+      });
+    } else {
+      // Update quantity if already in cart
+      updateQuantity(product.id, currentQuantity + 1);
+    }
   };
 
-  const decrement = (id) => {
-    setCounts(prev => ({
-      ...prev,
-      [id]: prev[id] > 0 ? prev[id] - 1 : 0,
-    }));
+  const decrement = (product) => {
+    const currentQuantity = getCartItemQuantity(product.id);
+    if (currentQuantity > 0) {
+      updateQuantity(product.id, currentQuantity - 1);
+    }
   };
 
   return (
@@ -84,7 +89,7 @@ const ProductGrid = () => {
           {/* Counter */}
           <div className="flex items-center mt-4">
             <button
-              onClick={() => decrement(product.id)}
+              onClick={() => decrement(product)}
               className="rounded-l-3xl px-3 py-1 bg-yellow-400 hover:bg-yellow-500 active:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:ring-offset-1 text-gray-600 transition-colors duration-150"
             >
               -
@@ -92,11 +97,11 @@ const ProductGrid = () => {
             <input
               type="text"
               className="p-1 bg-gray-100 text-center w-20 hover:bg-gray-200"
-              value={counts[product.id] || 0}
+              value={getCartItemQuantity(product.id)}
               readOnly
             />
             <button
-              onClick={() => increment(product.id)}
+              onClick={() => increment(product)}
               className="rounded-r-3xl px-3 py-1 bg-yellow-400 hover:bg-yellow-500 active:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:ring-offset-1 text-gray-600 transition-colors duration-150"
             >
               +

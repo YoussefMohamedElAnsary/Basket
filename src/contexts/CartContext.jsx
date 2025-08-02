@@ -98,6 +98,12 @@ export const CartProvider = ({ children }) => {
     return cart.reduce((total, item) => total + (item.price * item.quantity), 0);
   };
 
+  // Get cart item quantity by product ID
+  const getCartItemQuantity = (productId) => {
+    const cartItem = cart.find(item => item.id === productId);
+    return cartItem ? cartItem.quantity : 0;
+  };
+
   const value = {
     cart,
     loading,
@@ -106,7 +112,8 @@ export const CartProvider = ({ children }) => {
     updateQuantity,
     clearCart,
     getTotalItems,
-    getTotalPrice
+    getTotalPrice,
+    getCartItemQuantity
   };
 
   return (
