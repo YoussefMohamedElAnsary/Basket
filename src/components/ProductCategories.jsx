@@ -1,14 +1,41 @@
-import React from 'react';
-
-const categories = [
-  "beauty", "fragrances", "furniture", "groceries", "home-decoration",
-  "kitchen-accessories", "laptops", "mens-shirts", "mens-shoes", "mens-watches",
-  "mobile-accessories", "motorcycle", "skin-care", "smartphones", "sports-accessories",
-  "sunglasses", "tablets", "tops", "vehicle", "womens-bags", "womens-dresses",
-  "womens-jewellery", "womens-shoes", "womens-watches"
-];
+import React, { useState, useEffect } from 'react';
 
 const ProductCategories = ({ selectedCategories, setSelectedCategories }) => {
+  const [categories, setCategories] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchCategories = async () => {
+      try {
+        const response = await fetch('https://dummyjson.com/products');
+        const data = await response.json();
+        
+        // Count products per category
+        const categoryCounts = {};
+        data.products.forEach(product => {
+          if (categoryCounts[product.category]) {
+            categoryCounts[product.category]++;
+          } else {
+            categoryCounts[product.category] = 1;
+          }
+        });
+
+        // Only include categories that have products
+        const categoriesWithProducts = Object.keys(categoryCounts).filter(
+          category => categoryCounts[category] > 0
+        );
+
+        setCategories(categoriesWithProducts);
+        setLoading(false);
+      } catch (error) {
+        console.error('Error fetching categories:', error);
+        setLoading(false);
+      }
+    };
+
+    fetchCategories();
+  }, []);
+
   const handleChange = (category) => {
     if (selectedCategories.includes(category)) {
       setSelectedCategories(selectedCategories.filter(c => c !== category));
@@ -16,6 +43,17 @@ const ProductCategories = ({ selectedCategories, setSelectedCategories }) => {
       setSelectedCategories([...selectedCategories, category]);
     }
   };
+
+  if (loading) {
+    return (
+      <div className="w-full sm:w-48 mt-4">
+        <h3 className="text-sm font-semibold uppercase mb-3 text-gray-800">
+          Product Categories
+        </h3>
+        <div className="text-sm text-gray-500">Loading categories...</div>
+      </div>
+    );
+  }
 
   return (
     <div className="w-full sm:w-48 mt-4">
@@ -31,7 +69,7 @@ const ProductCategories = ({ selectedCategories, setSelectedCategories }) => {
               checked={selectedCategories.includes(category)}
               onChange={() => handleChange(category)}
             />
-            <span>{category}</span>
+            <span>{category.charAt(0).toUpperCase() + category.slice(1).replace(/-/g, ' ')}</span>
           </label>
         ))}
       </div>
