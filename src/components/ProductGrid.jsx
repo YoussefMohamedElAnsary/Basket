@@ -28,12 +28,10 @@ const ProductGrid = ({ priceFrom, priceTo, availability, selectedCategories }) =
       .catch(err => console.error('Error fetching data:', err));
   }, []);
 
-  const increment = (id) => {
-    setCounts(prev => ({ ...prev, [id]: prev[id] + 1 }));
+
   const increment = (product) => {
     const currentQuantity = getCartItemQuantity(product.id);
     if (currentQuantity === 0) {
-      // Add to cart if not already there
       addToCart({
         id: product.id,
         name: product.title,
@@ -42,16 +40,12 @@ const ProductGrid = ({ priceFrom, priceTo, availability, selectedCategories }) =
         quantity: 1
       });
     } else {
-      // Update quantity if already in cart
       updateQuantity(product.id, currentQuantity + 1);
     }
   };
 
-  const decrement = (id) => {
-    setCounts(prev => ({ ...prev, [id]: Math.max(prev[id] - 1, 0) }));
-  };
 
-  // 🔥 Filter by price, availability, and category
+
   const filteredProducts = products.filter(p => {
     const matchesPrice = p.price >= priceFrom && p.price <= priceTo;
 
@@ -208,6 +202,7 @@ const ProductGrid = ({ priceFrom, priceTo, availability, selectedCategories }) =
           </div>
         </div>
       ))}
+    </div>
     </div>
   );
 };
