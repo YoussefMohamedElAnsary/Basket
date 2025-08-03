@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
-import secure_delivery_icon from '../assets/secure-delivery-icon.png'
-import nav_logo from '../assets/nav-logo.png'
-import shopping_basket from '../assets/shopping-basket.png'
+import secure_delivery_icon from '../assets/nav-assets/secure-delivery-icon.png'
+import nav_logo from '../assets/nav-assets/nav-logo.png'
+import shopping_basket from '../assets/nav-assets/shopping-basket.png'
 import { Menu } from '@headlessui/react'
 import { Link, NavLink } from 'react-router-dom';
 import SignInModal from './SignInModal';

@@ -7,10 +7,11 @@ import BannerSection from '../components/BannerSection.jsx'
 import BlogSection from '../components/BlogSection.jsx'
 import Newsletter from '../components/Newsletter.jsx'
 import Footer from '../components/Footer.jsx'
+import CookieIce from '../components/CookieIce.jsx'
 function Home() {
   return (
    <>
-   <Heading /> 
+    <Heading /> 
    <Card /> 
    <Discount /> 
    <DiscountSection /> 

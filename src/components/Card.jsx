@@ -5,8 +5,7 @@ import { useNavigate } from 'react-router-dom';
 function Card() {
   const [products, setProducts] = useState([]);
   const scrollRef = useRef(null);
-    const navigate = useNavigate();
-
+  const navigate = useNavigate();
 
   useEffect(() => {
     axios.get('https://dummyjson.com/products')
@@ -23,30 +22,34 @@ function Card() {
   };
 
   return (
-    <div className="relative px-[210px] mx-auto w-full ">
-      {/* Arrows */}
+    <div className="relative px-4 sm:px-6 lg:px-12 xl:px-20 2xl:px-32 max-w-screen-2xl mx-auto w-full">
+      {/* Scroll Buttons */}
       <button
         onClick={scrollLeft}
-        className="absolute left-0 top-1/2 transform -translate-y-1/2 z-10 bg-white shadow p-2 rounded-full"
+        className="hidden sm:flex absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-white shadow p-2 rounded-full"
       >
         &lt;
       </button>
 
       <button
         onClick={scrollRight}
-        className="absolute right-0 top-1/2 transform -translate-y-1/2 z-10 bg-white shadow p-2 rounded-full"
+        className="hidden sm:flex absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-white shadow p-2 rounded-full"
       >
         &gt;
       </button>
 
-      {/* Scrollable Row */}
+      {/* Scrollable Products */}
       <div
         ref={scrollRef}
-        className="flex overflow-x-auto  scrollbar-hide py-4 px-8"
+        className="flex overflow-x-auto gap-2 scrollbar-hide py-4"
         style={{ scrollBehavior: 'smooth' }}
       >
         {products.map((product) => (
-          <div key={product.id} className="min-w-[250px] max-w-xs w-full border border-gray-200 p-4 relative font-sans bg-white" onClick={() => navigate(`/prodect/${product.id}`)}>
+          <div
+            key={product.id}
+            onClick={() => navigate(`/prodect/${product.id}`)}
+            className="flex-shrink-0 min-w-[250px] max-w-[280px] w-full border border-gray-200 p-4 rounded-md bg-white"
+          >
             <div className="absolute top-4 left-4 bg-teal-500 text-white text-xs font-semibold rounded-md px-3 py-1 select-none">
               22%
             </div>
@@ -60,29 +63,35 @@ function Card() {
               />
             </div>
 
-            <h2 className="text-gray-900 text-sm font-medium leading-snug mb-1">
+            <h2 className="text-gray-900 text-sm font-medium leading-snug mb-1 line-clamp-2">
               {product.title}
             </h2>
 
-            <p className="text-green-600 text-xs font-semibold mb-3 tracking-wide select-none"> {product.availabilityStatus}</p>
+            <p className="text-green-600 text-xs font-semibold mb-3 tracking-wide select-none">
+              {product.availabilityStatus || 'In stock'}
+            </p>
 
             <div className="flex items-center space-x-2 mb-4">
               <div className="flex space-x-1 text-yellow-400">
                 {[1, 2, 3, 4].map((_, i) => (
                   <svg key={i} className="w-4 h-4 fill-current" viewBox="0 0 20 20">
-                    <path d="M10 15l-5.878 3.09 1.123-6.545L.49 6.91l6.562-.955L10 0l2.948 5.955 6.561.955-4.755 4.635 1.124 6.545z"/>
+                    <path d="M10 15l-5.878 3.09 1.123-6.545L.49 6.91l6.562-.955L10 0l2.948 5.955 6.561.955-4.755 4.635 1.124 6.545z" />
                   </svg>
                 ))}
                 <svg className="w-4 h-4 text-gray-300 fill-current" viewBox="0 0 20 20">
-                  <path d="M10 15l-5.878 3.09 1.123-6.545L.49 6.91l6.562-.955L10 0l2.948 5.955 6.561.955-4.755 4.635 1.124 6.545z"/>
+                  <path d="M10 15l-5.878 3.09 1.123-6.545L.49 6.91l6.562-.955L10 0l2.948 5.955 6.561.955-4.755 4.635 1.124 6.545z" />
                 </svg>
               </div>
               <span className="text-sm text-slate-600 select-none">{product.rating}</span>
             </div>
 
             <div className="mb-6">
-              <span className="line-through text-gray-400 text-sm mr-2 select-none">${(product.price + product.price * product.discountPercentage / 100).toFixed(2)}</span>
-              <span className="text-xl font-bold text-rose-600 select-none">${product.price}</span>
+              <span className="line-through text-gray-400 text-sm mr-2 select-none">
+                ${(product.price + (product.price * product.discountPercentage / 100)).toFixed(2)}
+              </span>
+              <span className="text-xl font-bold text-rose-600 select-none">
+                ${product.price}
+              </span>
             </div>
 
             <button
