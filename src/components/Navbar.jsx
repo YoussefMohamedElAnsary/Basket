@@ -3,29 +3,27 @@ import secure_delivery_icon from '../assets/nav-assets/secure-delivery-icon.png'
 import nav_logo from '../assets/nav-assets/nav-logo.png'
 import shopping_basket from '../assets/nav-assets/shopping-basket.png'
 import { Menu } from '@headlessui/react'
-import { Link, NavLink } from 'react-router-dom';
-import SignInModal from './SignInModal';
-import SignUpModal from './SignUpModal';
+import { Link, NavLink, useNavigate } from 'react-router-dom';
+import { useAuth } from '../contexts/AuthContext';
+import { useCart } from '../contexts/CartContext';
 
 const Navbar = () => {
    
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-    const [isSignInOpen, setIsSignInOpen] = useState(false);
-    const [isSignUpOpen, setIsSignUpOpen] = useState(false);
     const [selectedMenu, setSelectedMenu] = useState('');
     const [selectedMainNav, setSelectedMainNav] = useState('home');
-    useEffect(() => {
-    const openSignUp = () => {
-        setIsSignUpOpen(true);
-    };
+    const { currentUser, signout } = useAuth();
+    const { getTotalItems, getTotalPrice } = useCart();
+    const navigate = useNavigate();
 
-    window.addEventListener('openSignUp', openSignUp);
-
-    return () => {
-        window.removeEventListener('openSignUp', openSignUp);
+    const handleSignOut = async () => {
+        try {
+            await signout();
+            navigate('/');
+        } catch (error) {
+            console.error('Failed to sign out:', error);
+        }
     };
-    }, []);
- 
 
     return (
         <div className='w-full '>
@@ -45,8 +43,8 @@ const Navbar = () => {
                     <img src={secure_delivery_icon} alt="secure_delivery_icon" className='w-4 h-4' />
                     <p className='text-gray-500 text-weight-400 hidden lg:block'>100% Secure delivery without contacting the courier</p>
                     <div className="h-4 w-[1px] bg-gray-300 mx-4 hidden lg:block"></div>
-                    <div className='items-center gap-2 border-r border-gray-200 pr-4 h-full py-0 hidden lg:flex'>
-                        Need help? Call Us: <span className='text-[#35AFA0]'>+ 0020 500</span>
+                    <div className='items-center gap-2 border-r border-gray-200 pr-4 h-full py-0 flex '>
+                        <span className='hidden lg:flex'>Need help? Call Us: </span><span className='text-[#35AFA0]'>+ 0020 500</span>
                     </div>
                     <Menu as="div" className="relative inline-block">
                         <Menu.Button className="inline-flex items-center gap-1 px-2 py-1 text-sm font-medium text-gray-900 hover:bg-gray-50 focus:outline-none cursor-pointer">
@@ -151,19 +149,34 @@ const Navbar = () => {
 
                 <div className='flex items-center gap-4 lg:gap-6'>
                     <div className="flex items-center gap-4">
-                    <button
-                        onClick={() => setIsSignInOpen(true)}
-                        className="text-white bg-[#35AFA0] px-4 py-2 rounded-full hover:bg-[#2e998e] transition-all duration-200 text-sm font-medium cursor-pointer"
-                    >
-                        Sign In
-                    </button>
-
-                    <button
-                    onClick={() => setIsSignUpOpen(true)}
-                    className="text-[#35AFA0] border border-[#35AFA0] px-4 py-2 rounded-full hover:bg-[#35AFA0] hover:text-white transition-all duration-200 text-sm font-medium cursor-pointer"
-                    >
-                        Sign Up
-                    </button>
+                        {currentUser ? (
+                            <div className="flex items-center gap-2">
+                                <span className="text-sm text-gray-700 hidden md:block">
+                                    Welcome, {currentUser.email}
+                                </span>
+                                <button
+                                    onClick={handleSignOut}
+                                    className="text-[#35AFA0] border border-[#35AFA0] px-4 py-2 rounded-full hover:bg-[#35AFA0] hover:text-white transition-all duration-200 text-sm font-medium cursor-pointer"
+                                >
+                                    Sign Out
+                                </button>
+                            </div>
+                        ) : (
+                            <>
+                                <Link
+                                    to="/signin"
+                                    className="text-white bg-[#35AFA0] px-4 py-2 rounded-full hover:bg-[#2e998e] transition-all duration-200 text-sm font-medium cursor-pointer"
+                                >
+                                    Sign In
+                                </Link>
+                                <Link
+                                    to="/signup"
+                                    className="text-[#35AFA0] border border-[#35AFA0] px-4 py-2 rounded-full hover:bg-[#35AFA0] hover:text-white transition-all duration-200 text-sm font-medium cursor-pointer"
+                                >
+                                    Sign Up
+                                </Link>
+                            </>
+                        )}
                     </div>
                     <Link to="/checkout" className='flex items-center gap-4 cursor-pointer'>
                         <div className='w-8 h-8 lg:w-9 lg:h-9 rounded-full bg-gray-100 flex items-center justify-center'>
@@ -171,12 +184,16 @@ const Navbar = () => {
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                             </svg>
                         </div>
-                        <span className='text-gray-900 font-medium hidden lg:block'>$0.00</span>
+                        <span className='text-gray-900 font-medium hidden lg:block'>
+                            ${getTotalPrice().toFixed(2)}
+                        </span>
                         <div className='relative'>
                             <div className='bg-[#FFF1EE] p-2 rounded-full'>
                                 <img src={shopping_basket} alt="shopping_basket" className='w-4 h-4 lg:w-5 lg:h-5' />
                             </div>
-                            <span className='absolute -top-2 -right-2 bg-red-500 text-white text-xs w-4 h-4 lg:w-5 lg:h-5 rounded-full flex items-center justify-center'>0</span>
+                            <span className='absolute -top-2 -right-2 bg-red-500 text-white text-xs w-4 h-4 lg:w-5 lg:h-5 rounded-full flex items-center justify-center'>
+                                {getTotalItems()}
+                            </span>
                         </div>
                     </Link>
                 </div>
@@ -474,10 +491,24 @@ const Navbar = () => {
                             </div>
                         </Menu.Items>
                     </Menu>
-                    <a href="#" className='text-gray-600 hover:text-[#35AFA0]'>BLOG</a>
-                    <Link to="/contact" className='text-gray-600 hover:text-[#35AFA0]'>Contact</Link>
-                    {isSignInOpen && <SignInModal onClose={() => setIsSignInOpen(false)} />}
-                    {isSignUpOpen && <SignUpModal onClose={() => setIsSignUpOpen(false)} />}
+                    <NavLink
+                        to="/blog1"
+                        onClick={() => setSelectedMainNav('blog')}
+                        className={({ isActive }) =>
+                            `cursor-pointer ${selectedMainNav === 'blog' ? 'text-[#35AFA0] font-bold' : 'text-gray-700 font-normal'}`
+                        }
+                    >
+                        BLOG
+                    </NavLink>
+                    <NavLink
+                        to="/contact"
+                        onClick={() => setSelectedMainNav('contact')}
+                        className={({ isActive }) =>
+                            `cursor-pointer ${selectedMainNav === 'contact' ? 'text-[#35AFA0] font-bold' : 'text-gray-700 font-normal'}`
+                        }
+                    >
+                        CONTACT
+                    </NavLink>
                 </nav>
             </div>
         </div>

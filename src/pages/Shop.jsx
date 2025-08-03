@@ -1,7 +1,7 @@
  import React, { useState } from 'react';
 
 import Card from '../components/card'
-import Heading  from '../components/heading.jsx'
+import Heading from '../components/heading.jsx'
 import ProductSection from '../components/ProductSection.jsx'
 import ProductCategories from '../components/ProductCategories.jsx'
 import BacolaBanner from '../components/BacolaBanner.jsx'

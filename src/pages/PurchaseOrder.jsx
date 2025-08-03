@@ -1,213 +1,14 @@
-// import React, { useReducer } from 'react'
-// import img1 from '../assets/Chobani.png'
-// import img2 from '../assets/Frozen Foods.png'
-// import img3 from '../assets/HouseholdNeeds.png'
-// import { IoIosArrowForward } from "react-icons/io";
-// import { MdOutlineShoppingBag } from "react-icons/md";
-// import { CiHeart } from "react-icons/ci";
-// import { VscLiveShare } from "react-icons/vsc";
-// import { AiOutlineTag } from "react-icons/ai";
-
-
-
-
-
-
-// const PurchaseOrder = () => {
-//   const initialState = {
-//     cart: [],
-//     readMore: false,
-//     productNumber: 1,
-//     selectedImg: img3, // Default selected image
-//   };
-//   const reducer = (state, action) => {
-//     switch (action.type) {
-//       case 'ADD_TO_CART':
-//         return {
-//           ...state,
-//           cart: [...state.cart, action.payload],
-//         };
-//       case 'TOGGLE_READ_MORE':
-//         return {
-//           ...state,
-//           readMore: !state.readMore,
-//         };
-//       case 'INCREASE_PRODUCT_NUMBER':
-//         return {
-//           ...state,
-//           productNumber: state.productNumber + 1,
-//         };
-//       case 'DECREASE_PRODUCT_NUMBER':
-//         return {
-//           ...state,
-//           productNumber: state.productNumber > 1 ? state.productNumber - 1 : 1,
-//         };
-//       case 'SELECT_IMAGE':
-//         return {
-//           ...state,
-//           selectedImg: action.payload,
-//         };
-//       default:
-//         return state;
-//     }
-//   };
-
-        
-//   // const [readMore, setReadMore] = useState(false);
-//   const [state , dispatch] = useReducer(reducer , initialState);
-//   console.log(initialState.readMore)
-//   // const toggleReadMore = () => {
-//   //   setReadMore(!readMore);
-//   // };
-//   return (
-//     <section className=' absolute top-0 left-0 right-0 z-10 p-8 bg-[#4d4d4d] h-full fixed '>
-
-//       <div className='container mx-auto flex flex-col items-center justify-center rounded-lg shadow-lg h-full bg-white lg:h-[85vh] gap-8 p-8 overflow-y-auto'>
-
-//       <div className='flex flex-col justify-center items-start gap-4 w-full pt-[50rem] lg:flex-row lg:pt-60 '>
-
-//       <div className='flex flex-col-reverse items-center justify-center gap-4 mb-8 w-full lg:w-[65%] lg:flex-row'>
-//         {/* sub img */}
-//         <div className='flex flex-row justify-center items-start gap-4 mb-8 w-full lg:w-1/4 lg:flex-col'>
-
-//           <figure onClick={() => dispatch({ type: 'SET_SELECTED_IMG', payload: img1 })} className='border-2 border-gray-300 p-4 rounded-md shadow-md bg-white'>
-//             <img src={img1} alt="Chobani" className='w-20 h-20 object-cover' />
-//           </figure>
-//           <figure onClick={() => dispatch({ type: 'SET_SELECTED_IMG', payload: img2 })} className='border-2 border-gray-300 p-4 rounded-md shadow-md bg-white '>
-//             <img src={img2} alt="Chobani" className='w-20 h-20 object-cover ' />
-//           </figure>
-//           <figure onClick={() => dispatch({ type: 'SET_SELECTED_IMG', payload: img3 })} className='border-2 border-gray-300 p-4 rounded-md shadow-md bg-white'>
-//             <img src={img3} alt="Chobani" className='w-20 h-20 object-cover' />
-//           </figure>
-
-//         </div>
-
-//         {/* main img */}
-//         <div className='w-full lg:w-[70%] flex justify-center items-center border-2 border-gray-300 p-4 rounded-md shadow-md bg-[#fff] relative'>
-//           <figure >
-//             <img src={state.selectedImg} alt="Household Needs" className='w-full object-cover' />
-//           </figure>
-
-//           {/* arrow next */}
-//           <button className='absolute top-1/2 right-2 bg-[#fff] w-7 h-7 rounded-full border-0 cursor-pointer shadow-md'>
-//             <span className='flex justify-center items-center mt-0.5 ml-0.5 text-md font-[600]'>
-//               <IoIosArrowForward />
-//             </span>
-
-//           </button>
-//         </div>
-//       </div>
-
-//       {/* details */}
-
-//       <div className='flex flex-col justify-center items-start gap-4 w-full lg:w-[30%] p-4'>
-//         {/* title */}
-//         <h2 className='text-xl font-semibold text-gray-800'>SkinnyPop Popcorn SkinnyPack Original</h2>
-//         {/* <h2 clasName='text-2xl font-bold'> SkinnyPop Popcorn SkinnyPack Original </h2> */}
-//         {/* price */}
-//         <p className='text-2xl font-semibold'>$15.00 - $25.00</p>
-
-//         {/* available  */}
-//         <div className='flex flex-col justify-center items-start gap-2 w-full'>
-//           <p className='text-[15px] font-[400] text-gray-400'>available in:</p>
-//           <ul className='liststyle-none flex space-x-1.5 mt-2'>
-//             <li className='text-[14px] font-[400] border-2 border-gray-400 px-2 py-1.5 rounded-md cursor-pointer'>Small</li>
-//             <li className='text-[14px] font-[400] border-2 border-gray-400 px-2 py-1.5 rounded-md cursor-pointer'>Medium</li>
-//             <li className='text-[14px] font-[400] border-2 border-gray-400 px-2 py-1.5 rounded-md cursor-pointer'>Large</li>
-//           </ul>
-//         </div>
-
-//         {/* number of prodect */}
-
-//         <div className='flex justify-center items-center space-x-10 mt-4 bg-[#F3F5F9] p-2 rounded-md shadow-md w-full'>
-//           <button onClick={
-// () => dispatch({ type: 'DECREASE_PRODUCT_NUMBER' })} className='text-2xl font-semibold border-0 cursor-pointer' disabled={state.productNumber <= 1}>-</button>
-
-//           <p className='text-xl font-semibold'>{state.productNumber}</p>
-//           <button onClick={() => dispatch({ type: 'INCREASE_PRODUCT_NUMBER' })} className='text-2xl font-semibold border-0 cursor-pointer'>+</button>
-        
-//         </div>
-
-//         {/* add to cart */}
-//         <button className='flex justify-center items-center space-x-2.5 bg-[#35AFA0] text-white px-6 py-2 rounded-md shadow-md hover:bg-[#35AFA18F]  cursor-pointer transition duration-300 mt-4 w-full'>
-//           <span className='text-lg  font-semibold'><MdOutlineShoppingBag /></span>
-//           <span className='text-lg  font-semibold'>Add to Cart</span>
-//         </button>
-
-//         {/* Wishlist and Share */}
-
-//           <div className='flex justify-center items-center space-x-4 mt-4 w-full'>
-
-//             <button className='w-1/2 text-[15px] font-[600] border-1 border-gray-300 cursor-pointer py-2.5  px-6 rounded-md   hover:text-gray-800 transition duration-300'>
-//               <CiHeart className='inline-block mr-2 text-2xl font-[400]' />
-//                Wishlist
-//             </button>
-
-//             <button className='w-1/2 text-[15px] font-[600] border-1 border-gray-300 cursor-pointer  px-6 py-2.5 rounded-md  hover:text-gray-800 transition duration-300'>
-//               <VscLiveShare className='inline-block mr-2 text-2xl font-[400]'/>
-
-//               Share
-//             </button>
-//         </div>
-
-//         {/* Tags: */}
-//         <div className='flex justify-start items-center gap-2 mt-4 w-full'>
-//           <p className='text-[15px] font-[400] text-gray-400 flex justify-center items-center '><span><AiOutlineTag /> </span> Tags:</p>
-//           <ul className='liststyle-none flex space-x-1.5 mt-2'>
-//             <li className='text-[14px] font-[400] border-2 border-gray-400 px-1.5 py-1 rounded-md cursor-pointer'>Snacks</li>
-//             <li className='text-[14px] font-[400] border-2 border-gray-400 px-1.5 py-1 rounded-md cursor-pointer'>Popcorn</li>
-//             <li className='text-[14px] font-[400] border-2 border-gray-400 px-1.5 py-1 rounded-md cursor-pointer'>Healthy</li>
-//           </ul>
-//           </div>
-
-//           {/* Product Details: */}
-//           <div className='mt-4 w-full'>
-//             <h3 className='text-[16px] font-semibold text-gray-800 mb-2'>Product Details:</h3>
-//             <span className='text-[14px] font-[400] text-gray-600'>SkinnyPop Popcorn SkinnyPack Original is a delicious and healthy snack option. Made with all-natural ingredients, it is gluten-free, non-GMO, and contains no artificial flavors or preservatives. Perfect for on-the-go snacking or enjoying at home....</span>
-//             {
-//               state.readMore === false ? <button onClick={() => dispatch({ type: 'TOGGLE_READ_MORE' })}  className='text-[#35AFA0] text-[14px] font-[400] hover:underline cursor-pointer'>Read more</button> :(
-//                 <>
-//                 <span className='text-[14px] font-[400] text-gray-600 '>Enjoy the light and airy texture of SkinnyPop Popcorn, available in various flavors to satisfy your cravings. Whether you're watching a movie or need a quick snack, this popcorn is a guilt-free choice that everyone will love.</span>
-//                   <button onClick={() => dispatch({ type: 'TOGGLE_READ_MORE' })} className='text-[#35AFA0] text-[14px] font-[400] hover:underline cursor-pointer mt-2'>Show less</button>
-//                 </>
-//               ) 
-//             }
-          
-            
-            
-//             </div>
-
-
-//       </div>
-
-
-//       </div>
-
-//       {/* Related products slider */}
-//       <div className='flex flex-col justify-center items-start w-full' >
-//         <h3 className='text-[22px] font-bold'>Related products</h3>
-//       </div>
-
-
-
-
-//       </div>
-      
-//     </section>
-//   )
-// }
-
-// export default PurchaseOrder
-
 import React, { useEffect, useReducer, useState } from 'react';
 import { IoIosArrowForward } from "react-icons/io";
 import { MdOutlineShoppingBag } from "react-icons/md";
 import { CiHeart } from "react-icons/ci";
 import { VscLiveShare } from "react-icons/vsc";
 import { AiOutlineTag } from "react-icons/ai";
-import { useParams } from 'react-router-dom';
-// import ProductSlider from '../components/RelatedPorduct';
+import { useParams, useNavigate } from 'react-router-dom';
+import ProductSlider from '../components/RelatedPorduct';
 import { IoClose } from "react-icons/io5";
+import { useAuth } from '../contexts/AuthContext';
+import { useCart } from '../contexts/CartContext';
 
 
 const initialState = {
@@ -249,7 +50,12 @@ const reducer = (state, action) => {
 const PurchaseOrder = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
   const [product, setProduct] = useState(null);
+  const [isAddingToCart, setIsAddingToCart] = useState(false);
+  const [showSuccess, setShowSuccess] = useState(false);
   const { id } = useParams();
+  const { currentUser } = useAuth();
+  const { addToCart, getCartItemQuantity } = useCart();
+  const navigate = useNavigate();
 
   useEffect(() => {
     document.body.style.overflow = 'hidden';
@@ -285,8 +91,17 @@ const PurchaseOrder = () => {
           className='absolute text-2xl top-5 left-5 text-red hover:text-gray-800 transition duration-300 cursor-pointer'
         >
           <IoClose />
-
         </button>
+
+        {/* View Cart Button */}
+        {currentUser && (
+          <button
+            onClick={() => navigate('/checkout')}
+            className='absolute text-sm top-5 right-5 bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition duration-300 cursor-pointer'
+          >
+            Go to Checkout
+          </button>
+        )}
         <div className='flex flex-col justify-center items-start gap-4 w-full pt-[70rem] lg:flex-row lg:pt-[30rem]'>
 
           {/* Image Section */}
@@ -341,19 +156,82 @@ const PurchaseOrder = () => {
             </div>
 
             {/* Add to Cart */}
-            <button className='flex justify-center items-center space-x-2 bg-[#35AFA0] text-white px-6 py-2 rounded-md shadow-md hover:bg-[#35AFA18F] transition duration-300 mt-4 w-full cursor-pointer'>
+            <button 
+              onClick={async () => {
+                if (!currentUser) {
+                  alert('Please sign in to add items to cart');
+                  navigate('/signin');
+                  return;
+                }
+                
+                setIsAddingToCart(true);
+                try {
+                  await addToCart({
+                    id: product.id,
+                    name: product.title,
+                    price: product.price,
+                    image: product.images[0],
+                    quantity: state.productNumber
+                  });
+                  setShowSuccess(true);
+                  setTimeout(() => setShowSuccess(false), 2000);
+                } catch (error) {
+                  console.error('Error adding to cart:', error);
+                  alert('Failed to add item to cart');
+                } finally {
+                  setIsAddingToCart(false);
+                }
+              }}
+              disabled={isAddingToCart}
+              className={`flex justify-center items-center space-x-2 px-6 py-2 rounded-md shadow-md transition duration-300 mt-4 w-full cursor-pointer ${
+                isAddingToCart 
+                  ? 'bg-gray-400 cursor-not-allowed' 
+                  : 'bg-[#35AFA0] text-white hover:bg-[#35AFA18F]'
+              }`}
+            >
               <MdOutlineShoppingBag className='text-lg' />
-              <span className='text-lg font-semibold'>Add to Cart</span>
+              <span className='text-lg font-semibold'>
+                {isAddingToCart ? 'Adding...' : 'Add to Cart'}
+              </span>
             </button>
+
+            {/* Success Message */}
+            {showSuccess && (
+              <div className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded mt-2">
+                ✓ Added to cart successfully!
+              </div>
+            )}
+
+            {/* Current Cart Quantity */}
+            {currentUser && getCartItemQuantity(product.id) > 0 && (
+              <div className="text-sm text-gray-600 mt-2">
+                In cart: {getCartItemQuantity(product.id)} items
+              </div>
+            )}
 
             {/* Wishlist / Share */}
             <div className='flex space-x-4 mt-4 w-full'>
-              <button className='w-1/2 text-sm font-semibold border border-gray-300 py-2.5 rounded-md hover:text-gray-800 cursor-pointer'>
+              <button 
+                onClick={() => {
+                  if (!currentUser) {
+                    alert('Please sign in to add items to wishlist');
+                    navigate('/signin');
+                    return;
+                  }
+                  alert('Wishlist feature coming soon!');
+                }}
+                className='w-1/2 text-sm font-semibold border border-gray-300 py-2.5 rounded-md hover:text-gray-800 cursor-pointer transition-colors'
+              >
                 <CiHeart className='inline-block mr-2 text-2xl' /> Wishlist
               </button>
-              <button className='w-1/2 text-sm font-semibold border border-gray-300 py-2.5 rounded-md hover:text-gray-800 cursor-pointer'>
-                <VscLiveShare className='inline-block mr-2 text-2xl' /> Share
-              </button>
+                             <button 
+                 onClick={() => {
+                   alert('Share feature coming soon!');
+                 }}
+                 className='w-1/2 text-sm font-semibold border border-gray-300 py-2.5 rounded-md hover:text-gray-800 cursor-pointer transition-colors'
+               >
+                 <VscLiveShare className='inline-block mr-2 text-2xl' /> Share
+               </button>
             </div>
 
             {/* Tags */}
@@ -393,7 +271,7 @@ const PurchaseOrder = () => {
         {/* Related Products */}
         <div className='flex flex-col justify-center items-start w-full mt-8'>
           <h3 className='text-xl font-bold'>Related products</h3>
-          {/* <ProductSlider /> */}
+          <ProductSlider />
         </div>
       </div>
     </section>
