@@ -144,14 +144,14 @@ const ProductGrid = ({ priceFrom, priceTo, availability, selectedCategories, sea
                   type="text"
                   value={getCartItemQuantity(product.id)}
                   readOnly
-                  className="w-13 text-center bg-gray-100 border-t border-b border-gray-200 py-1.5 md:py-1.5 lg:py-1.5 text-gray-700 text-sm"
+                  className="w-13 text-center bg-gray-100 border-t border-b border-gray-200 py-1 md:py-1.5 lg:py-1.5 text-gray-700 text-sm"
                 />
                 <button
                   onClick={(e) => {
                     e.stopPropagation();
                     increment(product);
                   }}
-                  className="sm:px-3  py-1 px-2 bg-yellow-400 hover:bg-yellow-500 rounded-r-full text-gray-800 font-bold text-base sm:text-lg transition"
+                  className="sm:px-3 py-1 px-2 bg-yellow-400 hover:bg-yellow-500 rounded-r-full text-gray-800 font-bold text-base sm:text-lg transition"
                 >
                   +
                 </button>
