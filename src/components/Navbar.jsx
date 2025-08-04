@@ -198,13 +198,13 @@ const Navbar = () => {
                             <>
                                 <Link
                                     to="/signin"
-                                    className="text-white bg-[#35AFA0] px-4 py-2 rounded-full hover:bg-[#2e998e] transition-all duration-200 text-sm font-medium cursor-pointer"
+                                    className=" sm:text-[9px] md:text-[10px] sm:py-1 sm:px-3 text-white bg-[#35AFA0] px-4 py-2 rounded-full hover:bg-[#2e998e] transition-all duration-200 text-sm font-medium cursor-pointer"
                                 >
                                     Sign In
                                 </Link>
                                 <Link
                                     to="/signup"
-                                    className="text-[#35AFA0] border border-[#35AFA0] px-4 py-2 rounded-full hover:bg-[#35AFA0] hover:text-white transition-all duration-200 text-sm font-medium cursor-pointer"
+                                    className=" sm:text-[10px] md:text-[11px] sm:py-1 sm:px-3 text-[#35AFA0] border border-[#35AFA0] px-4 py-2 rounded-full hover:bg-[#35AFA0] hover:text-white transition-all duration-200 text-sm font-medium cursor-pointer"
                                 >
                                     Sign Up
                                 </Link>
