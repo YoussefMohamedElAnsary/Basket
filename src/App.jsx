@@ -42,7 +42,6 @@ function App() {
         
         </Suspense>
 
-        <Footer />
         </SearchProvider>
       </CartProvider>
     </AuthProvider>
