@@ -41,7 +41,7 @@ function Card() {
       {/* Scrollable Products */}
       <div
         ref={scrollRef}
-        className="flex overflow-x-auto gap-3 sm:gap-4 scrollbar-hide py-4 px-2 sm:px-4"
+        className="flex w-full overflow-x-auto gap-3 sm:gap-4 scrollbar-hide py-4 px-2 sm:px-4"
         style={{ 
           scrollBehavior: 'smooth',
           scrollbarWidth: 'none',
