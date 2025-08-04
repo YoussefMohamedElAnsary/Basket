@@ -310,22 +310,22 @@ const Navbar = () => {
                         SHOP
                     </NavLink>
                     
-                    <div className=' flex items-start my-2 text-left'>                   {/* Popular Categories */}
-                     {categories.slice(0, 3).map((category, index) => (
-                         <button
-                             key={index}
-                             onClick={() => {
-                                 handleCategoryClick(category);
-                                 setSelectedMainNav(`category-${index}`);
-                             }}
-                             className={`cursor-pointer my-2 items-start text-left  hover:text-[#35AFA0] transition-colors ${
-                                 selectedMainNav === `category-${index}` ? 'text-[#35AFA0] font-bold' : 'text-gray-700 font-normal'
-                             }`}
-                         >
-                             {(category.charAt(0).toUpperCase() + category.slice(1).replace(/-/g, ' ')).toUpperCase()}
-                         </button>
-                     ))}
-                    </div>  
+                    {/* Popular Categories */}
+                    {categories.slice(0, 3).map((category, index) => (
+                        <NavLink
+                            key={index}
+                            to={`/shop?category=${encodeURIComponent(category)}`}
+                            onClick={() => {
+                                handleCategoryClick(category);
+                                setSelectedMainNav(`category-${index}`);
+                            }}
+                            className={({ isActive }) =>
+                                `cursor-pointer ${selectedMainNav === `category-${index}` ? 'text-[#35AFA0] font-bold' : 'text-gray-700 font-normal'}`
+                            }
+                        >
+                            {(category.charAt(0).toUpperCase() + category.slice(1).replace(/-/g, ' ')).toUpperCase()}
+                        </NavLink>
+                    ))}  
                     <NavLink
                         to="/blog1"
                         onClick={() => setSelectedMainNav('blog')}
