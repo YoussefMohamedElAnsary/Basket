@@ -27,12 +27,12 @@ const HeroSection = () => {
         </p>
 
         <Link
-          className="bg-teal-600 hover:bg-teal-700 transition-colors text-white font-semibold rounded-full px-4 sm:px-6 py-2 sm:py-3 text-sm sm:text-base flex items-center gap-2"
+          className="bg-teal-600 hover:bg-teal-700 transition-colors text-white font-semibold rounded-full px-2 sm:px-3 py-1.5 sm:py-2 text-xs sm:text-sm flex items-center gap-1"
           aria-label="Shop Now"
           to="/shop"
         >
           Shop Now
-          <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4 sm:w-5 sm:h-5" fill="none" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor">
+          <svg xmlns="http://www.w3.org/2000/svg" className="w-3 h-3 sm:w-4 sm:h-4" fill="none" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
           </svg>
         </Link>
