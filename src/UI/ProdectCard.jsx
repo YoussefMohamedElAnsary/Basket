@@ -81,68 +81,48 @@ const ProductCard = () => {
   };
 
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-4 w-full">
-      {products.map((item) => (
+    <div className="grid grid-cols-1  sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-3 w-full  ">
+      {products.map((product) => (
         <div
-          key={item.id}
-          className="flex flex-col justify-center items-start border-2 border-gray-100 p-8 rounded-md relative lg-w-[230px] w-full bg-white shadow-lg hover:shadow-xl cursor-pointer transition-shadow duration-300 ease-in-out"
+          key={product.id}
+          className="w-full border rounded-md   border-gray-200 p-6 relative font-sans bg-white shadow-sm"
         >
-          {/* Discount Badge */}
-          <div className="absolute top-5 left-3 bg-[#35AFA0] text-white text-[12px] font-[600] px-3.5 py-2.5 rounded-md">
-            {item.discountPercentage > 0
-              ? `${item.discountPercentage.toFixed(0)}%`
-              : 'No Discount'}
+          <div className="absolute top-4 left-4 bg-teal-500 text-white text-xs font-semibold rounded-md px-3 py-1 select-none">
+            {Math.round(product.discountPercentage)}%
           </div>
 
-          {/* Product Image */}
-          <img
-            src={item.thumbnail}
-            alt={item.title}
-            className="w-full h-[188px] object-cover mb-4 rounded-md cursor-pointer"
-            loading='lazy'
-            onClick={() => navigate(`/prodect/${item.id}`)}
-          />
+          <div className="flex justify-center mb-3">
+            <img
+              src={product.thumbnail}
+              alt={product.title}
+              className="w-32 h-32 object-contain"
+              onError={(e) => {
+                e.target.onerror = null;
+                e.target.src = 'https://via.placeholder.com/150';
+              }}
+            />
+          </div>
 
-          {/* Title */}
-          <p 
-            className="text-[18px] font-semibold mb-2 cursor-pointer hover:text-[#35AFA0]"
-            onClick={() => navigate(`/prodect/${item.id}`)}
-          >
-            {item.title}
-          </p>
+          <h2 className="text-gray-900 text-sm font-medium mb-1">{product.title}</h2>
+          <p className="text-green-600 text-xs font-semibold mb-3">{product.availabilityStatus}</p>
 
-          {/* Stock Status */}
-          <p className="text-[11px] uppercase text-[#00B853]">In stock</p>
+          <div className="flex items-center space-x-2 mb-3">
+            <div className="flex space-x-1 text-yellow-400">
+              {[...Array(5)].map((_, i) => (
+                <svg key={i} className={`w-4 h-4 ${i < Math.floor(product.rating) ? 'fill-current' : 'text-gray-300 fill-current'}`} viewBox="0 0 20 20">
+                  <path d="M10 15l-5.878 3.09 1.123-6.545L.49 6.91l6.562-.955L10 0l2.948 5.955 6.561.955-4.755 4.635 1.124 6.545z" />
+                </svg>
+              ))}
+            </div>
+            <span className="text-sm text-slate-600">{product.rating}</span>
+          </div>
 
-          {/* Rating */}
-          <div className="flex items-center space-x-1.5 mt-2">
-            <span className="text-[#FFCD00] text-[14px] font-semibold">
-              {'★'.repeat(Math.floor(item.rating)) +
-                '☆'.repeat(5 - Math.floor(item.rating))}
+          <div className="mb-2">
+            <span className="line-through text-gray-400 text-sm mr-2">
+              ${(product.price + product.price * product.discountPercentage / 100).toFixed(2)}
             </span>
-            <span className="text-[#71778E] text-[13px] font-semibold">
-              {item?.reviews?.length || 0} review
-            </span>
+            <span className="text-lg font-bold text-rose-600">${product.price}</span>
           </div>
-
-          {/* Price */}
-          <div className="flex items-center space-x-1.5 mt-4">
-            <p className="line-through text-gray-500 text-[18.4px] font-semibold">
-              ${(item.price * (1 + item.discountPercentage / 100)).toFixed(2)}
-            </p>
-            <p className="text-[#ED174A] text-[19px] font-semibold">
-              ${item.price}
-            </p>
-          </div>
-
-          {/* Add to Cart Button */}
-          <button
-            onClick={() => handleAddToCart(item)}
-            disabled={loading}
-            className="w-full mt-4 bg-[#35AFA0] text-white py-2 px-4 rounded-md hover:bg-[#2e998e] transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
-          >
-            {loading ? 'Adding...' : 'Add to Cart'}
-          </button>
         </div>
       ))}
     </div>

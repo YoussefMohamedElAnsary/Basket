@@ -178,84 +178,89 @@ const Product = () => {
   }, []);
 
   return (
-    <section className="container mx-auto my-10 px-4 flex flex-col lg:flex-row gap-6">
+    <section className="container mx-auto my-6 px-[180px]  flex flex-col  justify-start lg:flex-row gap-6">
       {/* Deals of the Week */}
       {products.map((item) => (
-        <div
-          key={item.id}
-          onClick={() => navigate(`/prodect/${item.id}`)}
-          className="flex flex-col border-2 border-[#ED174A] p-6 w-full lg:w-[330px] h-[700px] rounded-md cursor-pointer"
-        >
-          <p className="text-[20px] mb-4">
-            Deals of the <span className="font-bold">week!</span>
-          </p>
+  <div
+    key={item.id}
+    onClick={() => navigate(`/prodect/${item.id}`)}
+    className="flex flex-col border-2 sm:w-[300px] md:w-[300px]   border-[#ED174A] p-4 sm:p-6 w-full  lg:w-[330px] rounded-md cursor-pointer"
+  >
+    <p className="text-lg sm:text-xl mb-3 sm:mb-4">
+      Deals of the <span className="font-bold">week!</span>
+    </p>
 
-          {/* Timer */}
-          <div className="flex justify-center lg:justify-start items-center space-x-4 mb-6">
-            <span className="text-[20px] text-white font-semibold bg-[#ED174A] rounded-md py-2 px-3">
-              {String(hour).padStart(2, '0')}
-            </span>
-            <span className="text-lg font-semibold">:</span>
-            <span className="text-[20px] text-white font-semibold bg-[#ED174A] rounded-md py-2 px-3">
-              {String(minute).padStart(2, '0')}
-            </span>
-            <span className="text-lg font-semibold">:</span>
-            <span className="text-[20px] text-white font-semibold bg-[#ED174A] rounded-md py-2 px-3">
-              {String(second).padStart(2, '0')}
-            </span>
-          </div>
-          <p className="text-[12px] text-[#C2C2D3]">Remains until the end of the offer</p>
-
-          {/* Image */}
-          <div className="relative mb-6">
-            <img
-              src={item.thumbnail}
-              alt={item.title}
-              className="w-full h-[188px] object-cover mb-4 rounded-md"
-              loading='lazy'
-            />
-            <div className="absolute top-5 left-3 bg-[#35AFA0] text-white text-[12px] font-[600] px-3.5 py-2.5 rounded-md">
-              {item.discountPercentage > 0
-                ? `${item.discountPercentage.toFixed(0)}%`
-                : 'No Discount'}
-            </div>
-          </div>
-
-          <p className="text-[18px] font-semibold mb-2">{item.title}</p>
-          <p className="text-[11px] uppercase text-[#00B853]">In stock</p>
-
-          <div className="flex items-center space-x-1.5 mt-2">
-            <span className="text-[#FFCD00] text-[14px] font-semibold">
-              {'★'.repeat(Math.floor(item.rating || 0)) +
-                '☆'.repeat(5 - Math.floor(item.rating || 0))}
-            </span>
-            <span className="text-[#71778E] text-[13px] font-semibold">
-              {item.rating ? '1 review' : 'No reviews'}
-            </span>
-          </div>
-
-          <div className="flex items-center space-x-1.5 mt-4">
-            <p className="line-through text-gray-500 text-[18.4px] font-semibold">
-              ${(item.price * (1 + (item.discountPercentage || 0) / 100)).toFixed(2)}
-            </p>
-            <p className="text-[#ED174A] text-[19px] font-semibold">${item.price}</p>
-          </div>
-
-          <div className="flex justify-end items-center w-full mt-4">
-            <p className="text-[12px] uppercase text-[#C2C2D3] text-end">
-              Available:{' '}
-              <span className="text-[16px] font-semibold text-[#233A95]">79</span>
-            </p>
-          </div>
-
-          <div className="w-full bg-gray-200 rounded-full h-2.5 mt-4">
-            <div
-              className="bg-gradient-to-r from-[#D51243] to-[#FFCD00] h-2.5 rounded-full"
-              style={{ width: '79%' }}
-            ></div>
-          </div>
-        </div>
+    {/* Timer */}
+    <div className="flex flex-col lg:flex-row md:flex-col justify-start sm:justify-start items-center space-x-2 sm:space-x-2 mb-4 sm:mb-6">
+      {[hour, minute, second].map((unit, i) => (
+        <React.Fragment key={i}>
+          <span className="text-sm sm:text-[12px] text-white font-semibold bg-[#ED174A] rounded-md py-1 sm:py-2 px-2 sm:px-3">
+            {String(unit).padStart(2, '0')}
+          </span>
+          {i < 2 && <span className="text-base font-semibold">:</span>}
+        </React.Fragment>
       ))}
+    </div>
+
+    <p className="text-xs text-[#C2C2D3] mb-4">
+      Remains until the end of the offer
+    </p>
+
+    {/* Image */}
+    <div className="relative mb-4">
+      <img
+        src={item.thumbnail}
+        alt={item.title}
+        className="w-full h-[180px] sm:h-[188px] object-cover mb-3 rounded-md"
+        loading="lazy"
+      />
+      <div className="absolute top-3 left-2 bg-[#ED174A]  text-white text-[11px] sm:text-[12px] font-[600] px-3 sm:px-3 py-2 sm:py-2.5 rounded-4xl">
+        {item.discountPercentage > 0
+          ? `${item.discountPercentage.toFixed(0)}%`
+          : 'No Discount'}
+      </div>
+    </div>
+
+    {/* Pricing */}
+    <div className="flex items-center space-x-2 mb-2">
+      <p className="line-through text-gray-500 text-sm sm:text-[16px] font-semibold">
+        ${(item.price * (1 + (item.discountPercentage || 0) / 100)).toFixed(2)}
+      </p>
+      <p className="text-[#ED174A] text-base sm:text-[18px] font-semibold">${item.price}</p>
+    </div>
+
+    <p className="text-base font-semibold mb-1">{item.title}</p>
+    <p className="text-[10px] sm:text-[11px] uppercase text-[#00B853]">In stock</p>
+
+    {/* Rating */}
+    <div className="flex items-center space-x-1 mt-2">
+      <span className="text-[#FFCD00] text-sm sm:text-[14px] font-semibold">
+        {'★'.repeat(Math.floor(item.rating || 0)) +
+          '☆'.repeat(5 - Math.floor(item.rating || 0))}
+      </span>
+      <span className="text-[#71778E] text-xs sm:text-[13px] font-semibold">
+        {item.rating ? '1 review' : 'No reviews'}
+      </span>
+    </div>
+
+    {/* Availability */}
+    <div className="flex justify-end items-center w-full mt-4">
+      <p className="text-xs uppercase text-[#C2C2D3] text-end">
+        Available:{' '}
+        <span className="text-xs font-semibold text-[#233A95]">79</span>
+      </p>
+    </div>
+
+    {/* Stock bar */}
+    <div className="w-full bg-gray-200 rounded-full h-2.5 mt-4">
+      <div
+        className="bg-gradient-to-r from-[#D51243] to-[#FFCD00] h-2.5 rounded-full"
+        style={{ width: '79%' }}
+      ></div>
+    </div>
+  </div>
+))}
+
 
       {/* Main Product List */}
       <ProdectCard  />

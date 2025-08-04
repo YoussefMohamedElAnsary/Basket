@@ -12,8 +12,8 @@ import { faCcVisa, faCcMastercard, faCcStripe, faCcPaypal, faFacebookF, faTwitte
 const Footer = () => {
     return (
         <div className='w-full'>
-            <div className='w-full relative flex flex-col md:flex-row items-stretch bg-[#35AFA0] min-h-[320px] px-2 pt-2 md:px-6 md:pt-4 lg:px-16 lg:pt-5 pb-0'>
-                <div className='flex flex-col text-white text-2xl w-full md:w-1/2 flex-grow'>
+            <div className='w-full relative flex flex-col md:flex-row items-stretch bg-[#35AFA0] min-h-[320px] px-2 md:px-6 md:pt-4 lg:px-16  pb-0'>
+                <div className='flex flex-col justify-center text-white text-2xl w-full md:w-1/2 flex-grow'>
                     <div className='flex flex-row gap-2 font-light text-[18px]'>
                         <a href="#" className='underline decoration-white decoration-1'>$20 discount </a>for your first order
                     </div>

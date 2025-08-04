@@ -3,11 +3,18 @@ import Sidebar from "../components/Sidebar";
 import Pagination from "../components/Pagination";
 import water from "../assets/water.jpg";
 import chocolate from "../assets/chocolate.jpg";
-import Footer from "../components/Footer"
+import Footer from "../components/Footer";
+import Breadcrumbs from '../components/Breadcrumbs.jsx';
 
 const BlogPage1 = () => {
   return (
-    <> <div className="max-w-7xl mx-auto p-6 grid lg:grid-cols-3 gap-8">
+    <> 
+      
+    <div className="px-[180px]">
+      <Breadcrumbs />
+     </div>
+     
+    <div className="max-w-7xl mx-auto p-6 grid lg:grid-cols-3 gap-8">
       <div className="lg:col-span-2 space-y-10">
         <BlogCard
           image={water}

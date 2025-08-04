@@ -1,7 +1,13 @@
 import React from 'react';
+import Breadcrumbs from '../components/Breadcrumbs';
 
 const Contact = () => {
   return (
+    <>
+    <div className="px-[180px]">
+      <Breadcrumbs />
+     </div>
+     
     <div className="max-w-[1100px] mx-auto px-5 py-10 text-[#222]">
       <h2 className="text-3xl font-bold text-center mb-2">Get In Touch</h2>
       <p className="max-w-xl mx-auto text-center text-gray-600 mb-10">
@@ -53,6 +59,7 @@ const Contact = () => {
         </button>
       </form>
     </div>
+    </>
   );
 };
 

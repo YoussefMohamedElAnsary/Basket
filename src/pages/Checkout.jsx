@@ -4,6 +4,7 @@ import { useAuth } from '../contexts/AuthContext';
 import { useCart } from '../contexts/CartContext';
 import camera from '../assets/checkout-assets/camera-icon.png'
 import ItemCardCheckout from '../components/ItemCardCheckout'
+import Breadcrumbs from '../components/Breadcrumbs.jsx';
 
 function Checkout() {
     const [shipping, setShipping] = useState('standard');
@@ -40,7 +41,11 @@ function Checkout() {
     }
 
     return (
-        <div className="flex flex-col md:flex-row min-h-screen p-10 ">
+        <>
+        <div className="px-[180px]">
+              <Breadcrumbs />
+             </div>
+        <div className="flex flex-col md:flex-row min-h-screen px-10 ">
             <section className="flex flex-col pt-10 border-t-2  w-full md:w-1/2 md:border-r-2 md:border-l-0 md:border-t-0 md:border-b-0 border-gray-200 p-6">
                 <div className='flex flex-col px-15'>
                     <div className='flex justify-between items-center flex-row py-5'>
@@ -202,6 +207,7 @@ function Checkout() {
                 </div>
             </section>
         </div>
+        </>
     )
 }
 

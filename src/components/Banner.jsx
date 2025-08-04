@@ -4,7 +4,7 @@ import React from 'react'
 const Banner = ({ discount, title, subtitle, buttonText, imgSrc }) => {
   return (
     <div
-      className="rounded-lg shadow-md flex items-center max-w-[350px] w-full h-56 relative bg-cover bg-center text-white overflow-hidden"
+      className="rounded-lg shadow-md flex items-center max-w-[380px] w-full h-56 relative bg-cover bg-center text-white overflow-hidden"
       style={{ backgroundImage: `url(${imgSrc})` }}
     >
       <div className="absolute inset-0 bg-black/5"></div> {/* Overlay */}

@@ -6,9 +6,9 @@ import CookieIcee2 from '../assets/Cookie and Ice.png';
 
 const CookieIce = () => {
   return (
-    <section className="container mx-auto my-10 px-4 flex flex-col lg:flex-row gap-6">
+    <section className="container mx-auto my-6 px-4 flex flex-col lg:flex-row gap-6 justify-center">
       <div
-        className="flex flex-col p-6 w-full lg:w-[570px] h-[251.2px] rounded-md bg-cover bg-center relative"
+        className="flex flex-col  p-6 w-full lg:w-[570px] h-[251.2px] rounded-md bg-cover bg-center relative"
         style={{ backgroundImage: `url(${CookieIcee})` }}
       >
         <div className="absolute top-[50px] left-[40px]  rounded-md">

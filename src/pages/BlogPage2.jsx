@@ -3,10 +3,17 @@ import Sidebar from "../components/Sidebar";
 import Pagination from "../components/Pagination";
 import tea from "../assets/tea.jpg";
 import salad from "../assets/salad.jpg";
-import Footer from "../components/Footer"
+import Footer from "../components/Footer";
+import Breadcrumbs from '../components/Breadcrumbs.jsx';
+
 const BlogPage2 = () => {
   return (
     <>
+      
+    <div className="px-[180px]">
+      <Breadcrumbs />
+     </div>
+     
     <div className="max-w-7xl mx-auto p-6 grid lg:grid-cols-3 gap-8">
       <div className="lg:col-span-2 space-y-10">
         <BlogCard

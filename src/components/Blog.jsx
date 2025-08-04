@@ -1,18 +1,17 @@
 import React from 'react'
 
-import { banner4 } from '../assets';
 const Blog = ({title, category, date, imgSrc }) => {
   return (
-    <div div className='   items-center max-w-[350px] w-full  text-white '>
+    <div div className='   items-center max-w-[380px] w-full  text-white '>
     <div
-      className="rounded-lg shadow-md   max-w-[350px] w-full h-56  bg-cover bg-center text-white overflow-hidden"
+      className="rounded-lg shadow-md   max-w-[380px] w-full h-56  bg-cover bg-center text-white overflow-hidden"
       style={{ backgroundImage: `url(${imgSrc})` }}
     >
    
     </div>
 
  
-<div className="relative p-6  ">
+<div className="relative py-4 ">
   <p className="text-gray-400   font-medium uppercase tracking-wide text-sm">
     {category}
   </p>

@@ -2,8 +2,7 @@
 
 import Card from '../components/card'
 import Heading from '../components/heading.jsx'
-import ProductSection from '../components/ProductSection.jsx'
-import ProductCategories from '../components/ProductCategories.jsx'
+ import ProductCategories from '../components/ProductCategories.jsx'
 import BacolaBanner from '../components/BacolaBanner.jsx'
 import Brands from '../components/Brands.jsx'
 import Price from '../components/Price.jsx'
@@ -11,7 +10,8 @@ import Availability from '../components/Availability.jsx'
 import ProductGrid from '../components/ProductGrid.jsx'
 import Newsletter from '../components/Newsletter.jsx'
 import Footer from '../components/Footer.jsx'
-
+import Breadcrumbs from '../components/Breadcrumbs.jsx';
+ 
 function Shop() {
     const [priceFrom, setPriceFrom] = useState(0);
     const [priceTo, setPriceTo] = useState(1000); // Default high enough
@@ -23,7 +23,11 @@ function Shop() {
 
   return (
     <div>
+      <div className="px-[180px]">
+      <Breadcrumbs />
+     </div>
     <div className="flex flex-row justify-start py-5  px-[180px]">
+    
    <div className="flex flex-col justify-start ">
 
    <ProductCategories

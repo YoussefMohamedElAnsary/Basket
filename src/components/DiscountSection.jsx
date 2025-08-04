@@ -22,10 +22,11 @@ function DiscountSection() {
   const visibleProducts = products.slice(0, itemsPerPage);
 
   return (
-    <div className="px-4 sm:px-6 md:px-10 lg:px-20 xl:px-32 py-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2">
+    <div className="px-4 sm:px-6 md:px-10 lg:px-20 xl:px-42 py-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2">
       {visibleProducts.map((product) => (
         <div
           key={product.id}
+          onClick={() => navigate(`/prodect/${product.id}`)}
           className="w-full border rounded-md border-gray-200 p-4 relative font-sans bg-white shadow-sm"
         >
           <div className="absolute top-4 left-4 bg-teal-500 text-white text-xs font-semibold rounded-md px-3 py-1 select-none">

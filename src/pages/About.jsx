@@ -1,8 +1,14 @@
 import React from 'react';
+import Breadcrumbs from '../components/Breadcrumbs.jsx';
 
 const About = () => {
   return (
     <>
+      
+    <div className="px-[180px]">
+      <Breadcrumbs />
+     </div>
+     
       <section
         className="h-[300px] bg-[url('../public/img/hero.jpg')] bg-center bg-cover flex flex-col justify-center items-center text-white text-center"
       >
