@@ -6,15 +6,34 @@ import { Menu } from '@headlessui/react'
 import { Link, NavLink, useNavigate } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
 import { useCart } from '../contexts/CartContext';
+import { useSearch } from '../context/SearchContext';
 
 const Navbar = () => {
    
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const [selectedMenu, setSelectedMenu] = useState('');
     const [selectedMainNav, setSelectedMainNav] = useState('home');
+    const [searchInput, setSearchInput] = useState('');
+    const [categories, setCategories] = useState([]);
     const { currentUser, signout } = useAuth();
     const { getTotalItems, getTotalPrice } = useCart();
+    const { performSearch } = useSearch();
     const navigate = useNavigate();
+
+    // Fetch categories from the API
+    useEffect(() => {
+        const fetchCategories = async () => {
+            try {
+                const response = await fetch('https://dummyjson.com/products');
+                const data = await response.json();
+                const uniqueCategories = [...new Set(data.products.map(product => product.category))];
+                setCategories(uniqueCategories);
+            } catch (error) {
+                console.error('Error fetching categories:', error);
+            }
+        };
+        fetchCategories();
+    }, []);
 
     const handleSignOut = async () => {
         try {
@@ -23,6 +42,18 @@ const Navbar = () => {
         } catch (error) {
             console.error('Failed to sign out:', error);
         }
+    };
+
+    const handleSearch = (e) => {
+        e.preventDefault();
+        if (searchInput.trim()) {
+            performSearch(searchInput);
+            navigate(`/shop?search=${encodeURIComponent(searchInput.trim())}`);
+        }
+    };
+
+    const handleCategoryClick = (category) => {
+        navigate(`/shop?category=${encodeURIComponent(category)}`);
     };
 
     return (
@@ -132,19 +163,21 @@ const Navbar = () => {
                 </button>
 
                 <div className='hidden lg:flex flex-1 max-w-2xl mx-10'>
-                    <div className='relative w-full'>
+                    <form onSubmit={handleSearch} className='relative w-full'>
                         <input 
                             type="text" 
                             placeholder="Search for Products, fruit, meat, eggs .etc..."
                             className='w-full px-4 py-3 bg-gray-100 rounded-md focus:outline-none text-sm'
+                            value={searchInput}
+                            onChange={(e) => setSearchInput(e.target.value)}
                         />
                         
-                        <button className='absolute right-3 top-1/2 transform -translate-y-1/2'>
+                        <button type="submit" className='absolute right-3 top-1/2 transform -translate-y-1/2'>
                             <svg className="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                             </svg>
                         </button>
-                    </div>
+                    </form>
                 </div>
 
                 <div className='flex items-center gap-4 lg:gap-6'>
@@ -215,86 +248,45 @@ const Navbar = () => {
                             </svg>
                         </div>
                     </Menu.Button>
-                    <Menu.Items className="absolute z-50 w-full lg:w-[260px] mt-2 origin-top-left bg-white rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                    <Menu.Items className="absolute z-50 w-full lg:w-[260px] mt-2 origin-top-left bg-white rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none max-h-96 overflow-y-auto">
                         <div className="py-2">
-                            <Menu.Item>
-                                {({ active }) => (
-                                    <Link
-                                        to="#"
-                                        onClick={() => setSelectedMenu('fruits')}
-                                        className={`${active ? 'bg-gray-100' : ''} block px-4 py-2 text-sm cursor-pointer ${selectedMenu === 'fruits' ? 'text-[#35AFA0] font-semibold' : 'text-gray-700'}`}
-                                    >
-                                        Fruits & Vegetables
-                                    </Link>
-                                )}
-                            </Menu.Item>
-                            <Menu.Item>
-                                {({ active }) => (
-                                    <Link
-                                        to="#"
-                                        onClick={() => setSelectedMenu('meat')}
-                                        className={`${active ? 'bg-gray-100' : ''} block px-4 py-2 text-sm cursor-pointer ${selectedMenu === 'meat' ? 'text-[#35AFA0] font-semibold' : 'text-gray-700'}`}
-                                    >
-                                        Meat & Seafood
-                                    </Link>
-                                )}
-                            </Menu.Item>
-                            <Menu.Item>
-                                {({ active }) => (
-                                    <Link
-                                        to="#"
-                                        onClick={() => setSelectedMenu('bakery')}
-                                        className={`${active ? 'bg-gray-100' : ''} block px-4 py-2 text-sm cursor-pointer ${selectedMenu === 'bakery' ? 'text-[#35AFA0] font-semibold' : 'text-gray-700'}`}
-                                    >
-                                        Bakery
-                                    </Link>
-                                )}
-                            </Menu.Item>
-                            <Menu.Item>
-                                {({ active }) => (
-                                    <Link
-                                        to="#"
-                                        onClick={() => setSelectedMenu('beverages')}
-                                        className={`${active ? 'bg-gray-100' : ''} block px-4 py-2 text-sm cursor-pointer ${selectedMenu === 'beverages' ? 'text-[#35AFA0] font-semibold' : 'text-gray-700'}`}
-                                    >
-                                        Beverages
-                                    </Link>
-                                )}
-                            </Menu.Item>
-                            <Menu.Item>
-                                {({ active }) => (
-                                    <Link
-                                        to="#"
-                                        onClick={() => setSelectedMenu('dairy')}
-                                        className={`${active ? 'bg-gray-100' : ''} block px-4 py-2 text-sm cursor-pointer ${selectedMenu === 'dairy' ? 'text-[#35AFA0] font-semibold' : 'text-gray-700'}`}
-                                    >
-                                        Dairy & Eggs
-                                    </Link>
-                                )}
-                            </Menu.Item>
+                            {categories.map((category, index) => (
+                                <Menu.Item key={index}>
+                                    {({ active }) => (
+                                        <button
+                                            onClick={() => handleCategoryClick(category)}
+                                            className={`${active ? 'bg-gray-100' : ''} block w-full text-left px-4 py-2 text-sm cursor-pointer hover:text-[#35AFA0] transition-colors`}
+                                        >
+                                            {category.charAt(0).toUpperCase() + category.slice(1).replace(/-/g, ' ')}
+                                        </button>
+                                    )}
+                                </Menu.Item>
+                            ))}
                         </div>
                     </Menu.Items>
                     <div className="absolute -bottom-4 left-1/2 transform -translate-x-1/2">
                         <div className="bg-[#EDEEF5] border-2 border-white px-6 py-1 rounded-full text-[11px] whitespace-nowrap text-[#637381] font-medium">
-                            TOTAL 50 PRODUCTS
+                            TOTAL {categories.length} CATEGORIES
                         </div>
                     </div>
                 </Menu>
 
                 {/* Mobile search */}
                 <div className='w-full mb-4 lg:hidden'>
-                    <div className='relative'>
+                    <form onSubmit={handleSearch} className='relative'>
                         <input 
                             type="text" 
                             placeholder="Search for Products..."
                             className='w-full px-4 py-3 bg-gray-100 rounded-md focus:outline-none text-sm'
+                            value={searchInput}
+                            onChange={(e) => setSearchInput(e.target.value)}
                         />
-                        <button className='absolute right-3 top-1/2 transform -translate-y-1/2'>
+                        <button type="submit" className='absolute right-3 top-1/2 transform -translate-y-1/2'>
                             <svg className="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                             </svg>
                         </button>
-                    </div>
+                    </form>
                 </div>
 
                 {/* Mobile menu */}
@@ -317,180 +309,23 @@ const Navbar = () => {
                     >
                         SHOP
                     </NavLink>
-                    <Menu as="div" className="relative inline-block">
-                        <Menu.Button
-                            className={`flex items-center gap-1 cursor-pointer 
-                                ${selectedMainNav === 'meats' ? 'text-[#35AFA0] font-bold' : 'text-gray-600 font-normal'} 
-                                hover:text-[#35AFA0]`}
-                        >
-                            MEATS & SEAFOOD
-                            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
-                            </svg>
-                        </Menu.Button>
-                        <Menu.Items className="absolute z-50 w-48 mt-2 origin-top-left bg-white rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-                            <div className="py-2">
-                                <Menu.Item>
-                                    {({ active }) => (
-                                        <Link
-                                            to="#"
-                                            onClick={() => {
-                                                setSelectedMenu('freshmeat');
-                                                setSelectedMainNav('meats');
-                                            }}
-                                            className={`${active ? 'bg-gray-100' : ''} block px-4 py-2 text-sm cursor-pointer ${selectedMenu === 'freshmeat' ? 'text-[#35AFA0] font-semibold' : 'text-gray-700'}`}
-                                        >
-                                            Fresh Meat
-                                        </Link>
-                                    )}
-                                </Menu.Item>
-                                <Menu.Item>
-                                    {({ active }) => (
-                                        <Link
-                                            to="#"
-                                            onClick={() => {
-                                                setSelectedMenu('fish');
-                                                setSelectedMainNav('meats');
-                                            }}
-                                            className={`${active ? 'bg-gray-100' : ''} block px-4 py-2 text-sm cursor-pointer ${selectedMenu === 'fish' ? 'text-[#35AFA0] font-semibold' : 'text-gray-700'}`}
-                                        >
-                                            Fish
-                                        </Link>
-                                    )}
-                                </Menu.Item>
-                                <Menu.Item>
-                                    {({ active }) => (
-                                        <Link
-                                            to="#"
-                                            onClick={() => {
-                                                setSelectedMenu('shellfish');
-                                                setSelectedMainNav('meats');
-                                            }}
-                                            className={`${active ? 'bg-gray-100' : ''} block px-4 py-2 text-sm cursor-pointer ${selectedMenu === 'shellfish' ? 'text-[#35AFA0] font-semibold' : 'text-gray-700'}`}
-                                        >
-                                            Shellfish
-                                        </Link>
-                                    )}
-                                </Menu.Item>
-                            </div>
-                        </Menu.Items>
-                    </Menu>
-                    <Menu as="div" className="relative inline-block">
-                        <Menu.Button
-                            className={`flex items-center gap-1 cursor-pointer 
-                                ${selectedMainNav === 'bakery' ? 'text-[#35AFA0] font-bold' : 'text-gray-600 font-normal'} 
-                                hover:text-[#35AFA0]`}
-                        >
-                            BAKERY
-                            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
-                            </svg>
-                        </Menu.Button>
-                        <Menu.Items className="absolute z-50 w-48 mt-2 origin-top-left bg-white rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-                            <div className="py-2">
-                                <Menu.Item>
-                                    {({ active }) => (
-                                        <Link
-                                            to="#"
-                                            onClick={() => {
-                                                setSelectedMenu('bread');
-                                                setSelectedMainNav('bakery');
-                                            }}
-                                            className={`${active ? 'bg-gray-100' : ''} block px-4 py-2 text-sm cursor-pointer ${selectedMenu === 'bread' ? 'text-[#35AFA0] font-semibold' : 'text-gray-700'}`}
-                                        >
-                                            Bread
-                                        </Link>
-                                    )}
-                                </Menu.Item>
-                                <Menu.Item>
-                                    {({ active }) => (
-                                        <Link
-                                            to="#"
-                                            onClick={() => {
-                                                setSelectedMenu('pastries');
-                                                setSelectedMainNav('bakery');
-                                            }}
-                                            className={`${active ? 'bg-gray-100' : ''} block px-4 py-2 text-sm cursor-pointer ${selectedMenu === 'pastries' ? 'text-[#35AFA0] font-semibold' : 'text-gray-700'}`}
-                                        >
-                                            Pastries
-                                        </Link>
-                                    )}
-                                </Menu.Item>
-                                <Menu.Item>
-                                    {({ active }) => (
-                                        <Link
-                                            to="#"
-                                            onClick={() => {
-                                                setSelectedMenu('cakes');
-                                                setSelectedMainNav('bakery');
-                                            }}
-                                            className={`${active ? 'bg-gray-100' : ''} block px-4 py-2 text-sm cursor-pointer ${selectedMenu === 'cakes' ? 'text-[#35AFA0] font-semibold' : 'text-gray-700'}`}
-                                        >
-                                            Cakes
-                                        </Link>
-                                    )}
-                                </Menu.Item>
-                            </div>
-                        </Menu.Items>
-                    </Menu>
-                    <Menu as="div" className="relative inline-block">
-                        <Menu.Button
-                            className={`flex items-center gap-1 cursor-pointer 
-                                ${selectedMainNav === 'beverages' ? 'text-[#35AFA0] font-bold' : 'text-gray-600 font-normal'} 
-                                hover:text-[#35AFA0]`}
-                        >
-                            BEVERAGES
-                            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
-                            </svg>
-                        </Menu.Button>
-                        <Menu.Items className="absolute z-50 w-48 mt-2 origin-top-left bg-white rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-                            <div className="py-2">
-                                <Menu.Item>
-                                    {({ active }) => (
-                                        <Link
-                                            to="#"
-                                            onClick={() => {
-                                                setSelectedMenu('softdrinks');
-                                                setSelectedMainNav('beverages');
-                                            }}
-                                            className={`${active ? 'bg-gray-100' : ''} block px-4 py-2 text-sm cursor-pointer ${selectedMenu === 'softdrinks' ? 'text-[#35AFA0] font-semibold' : 'text-gray-700'}`}
-                                        >
-                                            Soft Drinks
-                                        </Link>
-                                    )}
-                                </Menu.Item>
-                                <Menu.Item>
-                                    {({ active }) => (
-                                        <Link
-                                            to="#"
-                                            onClick={() => {
-                                                setSelectedMenu('coffee');
-                                                setSelectedMainNav('beverages');
-                                            }}
-                                            className={`${active ? 'bg-gray-100' : ''} block px-4 py-2 text-sm cursor-pointer ${selectedMenu === 'coffee' ? 'text-[#35AFA0] font-semibold' : 'text-gray-700'}`}
-                                        >
-                                            Coffee & Tea
-                                        </Link>
-                                    )}
-                                </Menu.Item>
-                                <Menu.Item>
-                                    {({ active }) => (
-                                        <Link
-                                            to="#"
-                                            onClick={() => {
-                                                setSelectedMenu('juices');
-                                                setSelectedMainNav('beverages');
-                                            }}
-                                            className={`${active ? 'bg-gray-100' : ''} block px-4 py-2 text-sm cursor-pointer ${selectedMenu === 'juices' ? 'text-[#35AFA0] font-semibold' : 'text-gray-700'}`}
-                                        >
-                                            Juices
-                                        </Link>
-                                    )}
-                                </Menu.Item>
-                            </div>
-                        </Menu.Items>
-                    </Menu>
+                    
+                                         {/* Popular Categories */}
+                     {categories.slice(0, 3).map((category, index) => (
+                         <button
+                             key={index}
+                             onClick={() => {
+                                 handleCategoryClick(category);
+                                 setSelectedMainNav(`category-${index}`);
+                             }}
+                             className={`cursor-pointer hover:text-[#35AFA0] transition-colors ${
+                                 selectedMainNav === `category-${index}` ? 'text-[#35AFA0] font-bold' : 'text-gray-700 font-normal'
+                             }`}
+                         >
+                             {(category.charAt(0).toUpperCase() + category.slice(1).replace(/-/g, ' ')).toUpperCase()}
+                         </button>
+                     ))}
+                    
                     <NavLink
                         to="/blog1"
                         onClick={() => setSelectedMainNav('blog')}

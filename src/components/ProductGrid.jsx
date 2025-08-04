@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react';
 import { useCart } from '../contexts/CartContext';
 import { useNavigate } from 'react-router-dom';
 
-const ProductGrid = ({ priceFrom, priceTo, availability, selectedCategories }) => {
+const ProductGrid = ({ priceFrom, priceTo, availability, selectedCategories, searchResults, isSearching }) => {
   const [products, setProducts] = useState([]);
   const [counts, setCounts] = useState({});
   const { addToCart, updateQuantity, getCartItemQuantity } = useCart();
@@ -46,7 +46,10 @@ const ProductGrid = ({ priceFrom, priceTo, availability, selectedCategories }) =
 
 
 
-  const filteredProducts = products.filter(p => {
+  // Use search results if available, otherwise use filtered products
+  const displayProducts = searchResults && searchResults.length > 0 ? searchResults : products;
+  
+  const filteredProducts = displayProducts.filter(p => {
     const matchesPrice = p.price >= priceFrom && p.price <= priceTo;
 
     const inStockMatch = availability.inStock && p.availabilityStatus === 'In Stock';
@@ -67,7 +70,12 @@ const ProductGrid = ({ priceFrom, priceTo, availability, selectedCategories }) =
 
   return (
     <div className="grid sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-4 gap-1 px-2 py-6">
-      {filteredProducts.length > 0 ? (
+      {isSearching ? (
+        <div className="col-span-full text-center py-8">
+          <div className="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-teal-500"></div>
+          <p className="mt-2 text-gray-600">Searching...</p>
+        </div>
+      ) : filteredProducts.length > 0 ? (
         filteredProducts.map(product => (
           <div key={product.id}  onClick={() => navigate(`/prodect/${product.id}`)} className="bg-white border border-gray-200 rounded-lg p-4 relative">
           
@@ -85,8 +93,8 @@ const ProductGrid = ({ priceFrom, priceTo, availability, selectedCategories }) =
                 }}
               />
             </div>
-            <h2 className="text-sm font-medium text-gray-800 mb-1 ">{product.title}</h2>
-            <p className={`text-xs font-semibold  mb-2 ${product.availabilityStatus === 'IN STOCK' ? 'text-green-600' : 'text-red-500'}`}>
+            <h2 className="text-sm font-medium text-gray-800 mb-1 text-center">{product.title}</h2>
+            <p className={`text-xs font-semibold text-center mb-2 ${product.availabilityStatus === 'In Stock' ? 'text-green-600' : 'text-red-500'}`}>
               {product.availabilityStatus}
             </p>
             <div className="flex i justify-start my-2">
@@ -110,19 +118,25 @@ const ProductGrid = ({ priceFrom, priceTo, availability, selectedCategories }) =
             </div>
             <div className="flex justify-center items-center space-x-1 sm:space-x-0">
               <button
-                onClick={() => decrement(product.id)}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  decrement(product.id);
+                }}
                 className="sm:px-3 py-1 bg-yellow-400 hover:bg-yellow-500 rounded-l-full text-gray-800 font-bold text-base sm:text-lg transition"
               >
                 -
               </button>
               <input
                 type="text"
-                value={counts[product.id] || 0}
+                value={getCartItemQuantity(product.id)}
                 readOnly
                 className="w-12 text-center bg-gray-100 border-t border-b border-gray-200 py-1.5 text-gray-700 text-sm"
               />
               <button
-                onClick={() => increment(product.id)}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  increment(product);
+                }}
                 className="sm:px-3 py-1 bg-yellow-400 hover:bg-yellow-500 rounded-r-full text-gray-800 font-bold text-base sm:text-lg transition"
               >
                 +
@@ -131,9 +145,13 @@ const ProductGrid = ({ priceFrom, priceTo, availability, selectedCategories }) =
           </div>
         ))
       ) : (
-        <p className="text-gray-600 text-center col-span-full">No products found matching the filters.</p>
+        <p className="text-gray-600 text-center col-span-full">
+          {searchResults && searchResults.length === 0 ? 
+            "No products found matching your search." : 
+            "No products found matching the filters."
+          }
+        </p>
       )}
-    
     </div>
   );
 };
