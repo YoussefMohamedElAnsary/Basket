@@ -2,7 +2,7 @@ import React from 'react';
 import Breadcrumbs from '../components/Breadcrumbs.jsx';
 import Footer from '../components/Footer.jsx';
 
-import ceo from '../public/img/ceo.png';
+import ceo from '../../public/img/ceo.png';
 const About = () => {
   return (
     <>
