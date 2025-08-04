@@ -310,7 +310,7 @@ const Navbar = () => {
                         SHOP
                     </NavLink>
                     
-                    <div className='flex flex-col justify-start  text-left'>                   {/* Popular Categories */}
+                    <div className='  text-left'>                   {/* Popular Categories */}
                      {categories.slice(0, 3).map((category, index) => (
                          <button
                              key={index}
