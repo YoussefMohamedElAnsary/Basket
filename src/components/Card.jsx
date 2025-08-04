@@ -46,14 +46,14 @@ function Card() {
         style={{ scrollBehavior: "smooth" }}
       >
         {products.map((product) => (
-          <div
-            key={product.id}
-            onClick={() => navigate(`/prodect/${product.id}`)}
-            className="flex-shrink-0 min-w-[250px] max-w-[280px] w-full border border-gray-200 p-4 rounded-md bg-white"
-          >
-            <div className="absolute top-2 left-20 bg-teal-500 text-white text-xs font-semibold rounded-md px-2 py-1 select-none z-10">
-              {Math.round(product.discountPercentage)}%
-            </div>
+                     <div
+             key={product.id}
+             onClick={() => navigate(`/prodect/${product.id}`)}
+             className="flex-shrink-0 min-w-[250px] max-w-[280px] w-full border border-gray-200 p-4 rounded-md bg-white relative"
+           >
+             <div className="absolute top-2 left-2 bg-teal-500 text-white text-xs font-semibold rounded-md px-2 py-1 select-none z-10">
+               {Math.round(product.discountPercentage)}%
+             </div>
 
             <div className="flex justify-center mb-2">
               <img
