@@ -136,7 +136,7 @@ const ProductGrid = ({ priceFrom, priceTo, availability, selectedCategories, sea
                     e.stopPropagation();
                     decrement(product);
                   }}
-                  className="sm:px-3 py-1 sm:py-2 px-2 bg-yellow-400 hover:bg-yellow-500 rounded-l-full text-gray-800 font-bold text-base sm:text-lg transition"
+                  className="sm:px-3 py-1 px-2 bg-yellow-400 hover:bg-yellow-500 rounded-l-full text-gray-800 font-bold text-base sm:text-lg transition"
                 >
                   -
                 </button>
@@ -151,7 +151,7 @@ const ProductGrid = ({ priceFrom, priceTo, availability, selectedCategories, sea
                     e.stopPropagation();
                     increment(product);
                   }}
-                  className="sm:px-3 sm:py-2 py-1 px-2 bg-yellow-400 hover:bg-yellow-500 rounded-r-full text-gray-800 font-bold text-base sm:text-lg transition"
+                  className="sm:px-3  py-1 px-2 bg-yellow-400 hover:bg-yellow-500 rounded-r-full text-gray-800 font-bold text-base sm:text-lg transition"
                 >
                   +
                 </button>
