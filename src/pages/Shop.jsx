@@ -15,6 +15,8 @@ import Breadcrumbs from '../components/Breadcrumbs.jsx';
  import { useSearch } from '../context/SearchContext';
 
 function Shop() {
+  const [sortOrder, setSortOrder] = useState('asc');
+
     const [priceFrom, setPriceFrom] = useState(0);
     const [priceTo, setPriceTo] = useState(1000);
     const [availability, setAvailability] = useState({
