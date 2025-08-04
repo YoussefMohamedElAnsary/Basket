@@ -22,7 +22,7 @@ function Card() {
   };
 
   return (
-    <div className="relative px-4 sm:px-6 lg:px-12 xl:px-20 2xl:px-42 max-w-screen-2xl mx-auto w-full overflow-hidden">
+    <div className="relative px-4 sm:px-6 lg:px-12 xl:px-20 2xl:px-42 max-w-7xl mx-auto w-full overflow-hidden">
       {/* Scroll Buttons */}
       <button
         onClick={scrollLeft}
@@ -42,13 +42,17 @@ function Card() {
       <div
         ref={scrollRef}
         className="flex overflow-x-auto gap-3 sm:gap-4 scrollbar-hide py-4 px-2 sm:px-4"
-        style={{ scrollBehavior: 'smooth' }}
+        style={{ 
+          scrollBehavior: 'smooth',
+          scrollbarWidth: 'none',
+          msOverflowStyle: 'none'
+        }}
       >
         {products.map((product) => (
           <div
             key={product.id}
             onClick={() => navigate(`/prodect/${product.id}`)}
-            className="flex-shrink-0 min-w-[200px] sm:min-w-[220px] md:min-w-[240px] lg:min-w-[250px] xl:min-w-[280px] w-full border border-gray-200 p-3 sm:p-4 rounded-lg bg-white relative hover:shadow-md transition-shadow duration-200 cursor-pointer"
+            className="flex-shrink-0 min-w-[200px] sm:min-w-[220px] md:min-w-[240px] lg:min-w-[220px] xl:min-w-[240px] w-full border border-gray-200 p-3 sm:p-4 rounded-lg bg-white relative hover:shadow-md transition-shadow duration-200 cursor-pointer"
           >
             <div className="absolute top-2 left-2 bg-teal-500 text-white text-xs font-semibold rounded-md px-3 py-1 select-none z-10">
             {Math.round(product.discountPercentage)}%
@@ -58,7 +62,7 @@ function Card() {
               <img
                 src={product.thumbnail}
                 alt={product.title}
-                className="w-36 h-36 object-contain"
+                className="w-24 h-24 sm:w-28 sm:h-28 md:w-32 md:h-32 lg:w-36 lg:h-36 object-contain"
                 onError={(e) => { e.target.onerror = null; e.target.src = 'https://via.placeholder.com/150'; }}
               />
             </div>
