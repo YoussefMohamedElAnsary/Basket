@@ -39,10 +39,11 @@ function App() {
               <Route path="/blog2" element={<BlogPage2 />} />
               <Route path="/prodect/:id" element={<PurchaseOrder />} />
             </Routes>
-        </SearchProvider>
+        
         </Suspense>
 
         <Footer />
+        </SearchProvider>
       </CartProvider>
     </AuthProvider>
   );
