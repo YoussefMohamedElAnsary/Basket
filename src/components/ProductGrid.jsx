@@ -130,7 +130,7 @@ const ProductGrid = ({ priceFrom, priceTo, availability, selectedCategories, sea
                 </span>
                 <span className="text-lg font-medium text-rose-600">${product.price}</span>
               </div>
-              <div className="flex justify-center items-center space-x-1 sm:space-x-0">
+              <div className="flex justify-center gap-0 items-center space-x-0 sm:space-x-0">
                 <button
                   onClick={(e) => {
                     e.stopPropagation();
