@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, useEffect } from 'react';
+import React, { createContext, useContext, useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
 
 const SearchContext = createContext();
@@ -32,7 +32,7 @@ export const SearchProvider = ({ children }) => {
   }, []);
 
   // Search function
-  const performSearch = (query) => {
+  const performSearch = useCallback((query) => {
     if (!query.trim()) {
       setSearchResults([]);
       return;
@@ -60,7 +60,7 @@ export const SearchProvider = ({ children }) => {
         setSearchHistory(prev => [query.trim(), ...prev.slice(0, 4)]); // Keep last 5 searches
       }
     }, 300);
-  };
+  }, [allProducts, searchHistory]);
 
   const clearSearch = () => {
     setSearchQuery('');
@@ -71,6 +71,7 @@ export const SearchProvider = ({ children }) => {
     searchQuery,
     setSearchQuery,
     searchResults,
+    setSearchResults,
     isSearching,
     searchHistory,
     performSearch,
