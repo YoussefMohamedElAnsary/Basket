@@ -13,46 +13,17 @@ function Card() {
       .catch(err => console.error('Error fetching data:', err));
   }, []);
 
-  const scrollLeft = () => {
-    scrollRef.current.scrollBy({ left: -300, behavior: 'smooth' });
-  };
 
-  const scrollRight = () => {
-    scrollRef.current.scrollBy({ left: 300, behavior: 'smooth' });
-  };
 
   return (
-    <div className="relative px-4 sm:px-6 lg:px-12 xl:px-20 2xl:px-42 max-w-7xl mx-auto w-full overflow-hidden">
-      {/* Scroll Buttons */}
-      <button
-        onClick={scrollLeft}
-        className="flex absolute left-2 sm:left-4 lg:left-8 top-1/2 -translate-y-1/2 z-10 bg-white shadow-lg hover:shadow-xl p-2 sm:p-3 rounded-full transition-all duration-200"
-      >
-        &lt;
-      </button>
-
-      <button
-        onClick={scrollRight}
-        className="flex absolute right-2 sm:right-4 lg:right-8 top-1/2 -translate-y-1/2 z-10 bg-white shadow-lg hover:shadow-xl p-2 sm:p-3 rounded-full transition-all duration-200"
-      >
-        &gt;
-      </button>
-
-      {/* Scrollable Products */}
-      <div
-        ref={scrollRef}
-        className="flex overflow-x-auto gap-3 sm:gap-4 scrollbar-hide py-4 px-2 sm:px-4"
-        style={{ 
-          scrollBehavior: 'smooth',
-          scrollbarWidth: 'none',
-          msOverflowStyle: 'none'
-        }}
-      >
+    <div className="relative px-4 sm:px-6 lg:px-12 xl:px-20 2xl:px-42 max-w-7xl mx-auto w-full">
+      {/* Products Grid */}
+      <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4 py-4">
         {products.map((product) => (
           <div
             key={product.id}
             onClick={() => navigate(`/prodect/${product.id}`)}
-            className="flex-shrink-0 min-w-[280px] sm:min-w-[280px] md:min-w-[180px] lg:min-w-[200px] xl:min-w-[220px] w-full border border-gray-200 p-3 sm:p-4 rounded-lg bg-white relative hover:shadow-md transition-shadow duration-200 cursor-pointer"
+            className="w-full border border-gray-200 p-3 sm:p-4 rounded-lg bg-white relative hover:shadow-md transition-shadow duration-200 cursor-pointer"
           >
             <div className="absolute top-2 left-2 bg-teal-500 text-white text-xs font-semibold rounded-md px-3 py-1 select-none z-10">
             {Math.round(product.discountPercentage)}%
