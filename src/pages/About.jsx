@@ -1,6 +1,8 @@
 import React from 'react';
 import Breadcrumbs from '../components/Breadcrumbs.jsx';
+import Footer from '../components/Footer.jsx';
 
+import ceo from '../public/img/ceo.png';
 const About = () => {
   return (
     <>
@@ -39,7 +41,7 @@ const About = () => {
         </div>
 
         <div className="flex gap-8 items-center mb-10 flex-col md:flex-row text-left">
-          <img src="../public/img/ceo.png" alt="CEO" className="w-[300px] rounded-lg" />
+          <img src={ceo} alt="CEO" className="w-[300px] rounded-lg" />
           <div>
             <small className="text-gray-500 block mb-2">Rachel Leonard - Bacola CEO</small>
             <h3 className="text-lg font-semibold">Duis convallis luctus pretium.</h3>
@@ -77,6 +79,7 @@ const About = () => {
           </p>
         </div>
       </div>
+      <Footer />
     </>
   );
 };
