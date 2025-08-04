@@ -318,7 +318,7 @@ const Navbar = () => {
                                  handleCategoryClick(category);
                                  setSelectedMainNav(`category-${index}`);
                              }}
-                             className={`cursor-pointer hover:text-[#35AFA0] transition-colors ${
+                             className={`cursor-pointer items-start hover:text-[#35AFA0] transition-colors ${
                                  selectedMainNav === `category-${index}` ? 'text-[#35AFA0] font-bold' : 'text-gray-700 font-normal'
                              }`}
                          >
