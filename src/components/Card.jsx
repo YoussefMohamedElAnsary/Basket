@@ -22,7 +22,7 @@ function Card() {
   };
 
   return (
-    <div className="relative px-4 sm:px-6 lg:px-12 xl:px-20 2xl:px-42 max-w-6xl mx-auto w-full overflow-hidden">
+    <div className="relative px-4 sm:px-6 lg:px-12 xl:px-20 2xl:px-42 max-w-7xl mx-auto w-full overflow-hidden">
       {/* Scroll Buttons */}
       <button
         onClick={scrollLeft}
@@ -52,7 +52,7 @@ function Card() {
           <div
             key={product.id}
             onClick={() => navigate(`/prodect/${product.id}`)}
-            className="flex-shrink-0 min-w-[280px] sm:min-w-[280px] md:min-w-[200px] lg:min-w-[220px] xl:min-w-[240px] w-full border border-gray-200 p-3 sm:p-4 rounded-lg bg-white relative hover:shadow-md transition-shadow duration-200 cursor-pointer"
+            className="flex-shrink-0 min-w-[280px] sm:min-w-[280px] md:min-w-[180px] lg:min-w-[200px] xl:min-w-[220px] w-full border border-gray-200 p-3 sm:p-4 rounded-lg bg-white relative hover:shadow-md transition-shadow duration-200 cursor-pointer"
           >
             <div className="absolute top-2 left-2 bg-teal-500 text-white text-xs font-semibold rounded-md px-3 py-1 select-none z-10">
             {Math.round(product.discountPercentage)}%

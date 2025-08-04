@@ -27,7 +27,7 @@ const HeroSection = () => {
         </p>
 
         <Link
-          className="bg-teal-600 hover:bg-teal-700 transition-colors text-white font-semibold rounded-full px-2 sm:px-3 py-1.5 sm:py-2 text-xs sm:text-sm flex items-center gap-1"
+          className="bg-teal-600 hover:bg-teal-700 transition-colors text-white font-semibold rounded-full px-1.5 sm:px-2 py-1 sm:py-1.5 text-xs sm:text-sm flex items-center gap-0.5 w-fit"
           aria-label="Shop Now"
           to="/shop"
         >
