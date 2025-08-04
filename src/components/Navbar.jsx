@@ -310,7 +310,7 @@ const Navbar = () => {
                         SHOP
                     </NavLink>
                     
-                                         {/* Popular Categories */}
+                    <div className='flex flex-col justify-start'>                   {/* Popular Categories */}
                      {categories.slice(0, 3).map((category, index) => (
                          <button
                              key={index}
@@ -318,14 +318,14 @@ const Navbar = () => {
                                  handleCategoryClick(category);
                                  setSelectedMainNav(`category-${index}`);
                              }}
-                             className={`cursor-pointer items-start hover:text-[#35AFA0] transition-colors ${
+                             className={`cursor-pointer  hover:text-[#35AFA0] transition-colors ${
                                  selectedMainNav === `category-${index}` ? 'text-[#35AFA0] font-bold' : 'text-gray-700 font-normal'
                              }`}
                          >
                              {(category.charAt(0).toUpperCase() + category.slice(1).replace(/-/g, ' ')).toUpperCase()}
                          </button>
                      ))}
-                    
+                    </div>  
                     <NavLink
                         to="/blog1"
                         onClick={() => setSelectedMainNav('blog')}
