@@ -310,7 +310,7 @@ const Navbar = () => {
                         SHOP
                     </NavLink>
                     
-                    <div className=' items-start text-left'>                   {/* Popular Categories */}
+                    <div className=' items-start  text-left'>                   {/* Popular Categories */}
                      {categories.slice(0, 3).map((category, index) => (
                          <button
                              key={index}
@@ -318,7 +318,7 @@ const Navbar = () => {
                                  handleCategoryClick(category);
                                  setSelectedMainNav(`category-${index}`);
                              }}
-                             className={`cursor-pointer items-start text-left  hover:text-[#35AFA0] transition-colors ${
+                             className={`cursor-pointer my-4 items-start text-left  hover:text-[#35AFA0] transition-colors ${
                                  selectedMainNav === `category-${index}` ? 'text-[#35AFA0] font-bold' : 'text-gray-700 font-normal'
                              }`}
                          >
