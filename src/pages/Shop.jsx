@@ -75,7 +75,7 @@ function Shop() {
         </div>
 
         {/* Main Content Area */}
-        <div className="flex-1">
+        <div className="">
           <BacolaBanner />
           
           {/* Search Results Indicator */}
