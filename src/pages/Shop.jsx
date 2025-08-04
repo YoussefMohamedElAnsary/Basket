@@ -1,8 +1,8 @@
  import React, { useState, useEffect } from 'react';
 import { useSearchParams, useNavigate } from 'react-router-dom';
 
-import Card from '../components/Card'
-import Heading from '../components/Heading.jsx'
+import Card from '../components/card'
+import Heading from '../components/heading.jsx'
  import ProductCategories from '../components/ProductCategories.jsx'
 import BacolaBanner from '../components/BacolaBanner.jsx'
 import Brands from '../components/Brands.jsx'
@@ -53,7 +53,7 @@ function Shop() {
       <div className="px-[180px]">
       <Breadcrumbs />
      </div>
-    <div className="flex flex-row  justify-start py-5  px-[180px]">
+    <div className="flex flex-col md:flex-row sm:flex-col justify-start py-5  px-[180px]">
     
    <div className="flex flex-col justify-start ">
 
