@@ -53,7 +53,7 @@ function Shop() {
       <div className="px-[180px]">
       <Breadcrumbs />
      </div>
-    <div className="flex flex-row justify-start py-5  px-[180px]">
+    <div className="flex flex-row md:flex-col sm:flex-col justify-start py-5  px-[180px]">
     
    <div className="flex flex-col justify-start ">
 
