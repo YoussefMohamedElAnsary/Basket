@@ -2,7 +2,7 @@ import React from 'react';
 
 const Price = ({ priceFrom, priceTo, setPriceFrom, setPriceTo }) => {
   return (
-    <div className="mt-4 sm:w-48">
+    <div className="w-full">
       <h3 className="text-sm uppercase font-semibold mb-3 text-gray-800">Price</h3>
       <div className="flex flex-col gap-2 sm:flex-row sm:items-end sm:gap-4 text-gray-700">
         <div className="flex flex-col w-full sm:w-1/2 min-w-0">

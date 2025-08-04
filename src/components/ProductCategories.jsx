@@ -56,7 +56,7 @@ const ProductCategories = ({ selectedCategories, setSelectedCategories }) => {
   }
 
   return (
-    <div className="w-full sm:w-48 mt-4">
+    <div className="w-full">
       <h3 className="text-sm font-semibold uppercase mb-3 text-gray-800">
         Product Categories
       </h3>

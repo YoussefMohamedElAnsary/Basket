@@ -84,7 +84,7 @@ const ProductGrid = ({ priceFrom, priceTo, availability, selectedCategories, sea
 
   return (
     <>
-      <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 px-4 py-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 lg:gap-6">
         {isSearching ? (
           <div className="col-span-full text-center py-8">
             <div className="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-teal-500"></div>
@@ -92,7 +92,7 @@ const ProductGrid = ({ priceFrom, priceTo, availability, selectedCategories, sea
           </div>
         ) : paginatedProducts.length > 0 ? (
           paginatedProducts.map(product => (
-            <div key={product.id} onClick={() => navigate(`/prodect/${product.id}`)} className="bg-white border border-gray-200 rounded-lg p-4 relative hover:shadow-lg transition-shadow">
+            <div key={product.id} onClick={() => navigate(`/prodect/${product.id}`)} className="bg-white border border-gray-200 rounded-lg p-3 sm:p-4 relative hover:shadow-lg transition-shadow cursor-pointer">
               <div className="absolute top-3 left-3 bg-teal-500 text-white text-xs font-semibold rounded-md px-2 py-1">
                 {Math.round(product.discountPercentage)}%
               </div>
@@ -100,7 +100,7 @@ const ProductGrid = ({ priceFrom, priceTo, availability, selectedCategories, sea
                 <img
                   src={product.thumbnail}
                   alt={product.title}
-                  className="w-32 h-32 object-contain"
+                  className="w-24 h-24 sm:w-28 sm:h-28 lg:w-32 lg:h-32 object-contain"
                   onError={(e) => {
                     e.target.onerror = null;
                     e.target.src = 'https://via.placeholder.com/150';

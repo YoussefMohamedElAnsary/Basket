@@ -7,8 +7,8 @@ const Breadcrumbs = () => {
   const pathnames = location.pathname.split('/').filter(x => x)
 
   return (
-    <nav className="text-sm  pt-4  ">
-      <ol className="list-reset flex text-gray-600">
+    <nav className="text-sm pt-4">
+      <ol className="list-reset flex flex-wrap text-gray-600">
         <li>
           <Link to="/" className="text-blue-600 hover:underline">
             Home
