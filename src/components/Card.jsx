@@ -22,18 +22,18 @@ function Card() {
   };
 
   return (
-    <div className="relative  sm:px-6 lg:px-12 xl:px-20 2xl:px-42  max-w-screen-2xl mx-auto w-full overflow-hidden">
+    <div className="relative px-4 sm:px-6 lg:px-12 xl:px-20 2xl:px-42 max-w-screen-2xl mx-auto w-full overflow-hidden">
       {/* Scroll Buttons */}
       <button
         onClick={scrollLeft}
-        className="hidden sm:flex absolute left-30 top-1/2 -translate-y-1/2 z-10 bg-white shadow p-2 rounded-full"
+        className="flex absolute left-2 sm:left-4 lg:left-8 top-1/2 -translate-y-1/2 z-10 bg-white shadow-lg hover:shadow-xl p-2 sm:p-3 rounded-full transition-all duration-200"
       >
         &lt;
       </button>
 
       <button
         onClick={scrollRight}
-        className="hidden sm:flex absolute right-30 top-1/2 -translate-y-1/2 z-10 bg-white shadow p-2 rounded-full"
+        className="flex absolute right-2 sm:right-4 lg:right-8 top-1/2 -translate-y-1/2 z-10 bg-white shadow-lg hover:shadow-xl p-2 sm:p-3 rounded-full transition-all duration-200"
       >
         &gt;
       </button>
@@ -41,14 +41,14 @@ function Card() {
       {/* Scrollable Products */}
       <div
         ref={scrollRef}
-        className="flex overflow-x-hidden gap-2 scrollbar-hide py-4"
+        className="flex overflow-x-auto gap-3 sm:gap-4 scrollbar-hide py-4 px-2 sm:px-4"
         style={{ scrollBehavior: 'smooth' }}
       >
         {products.map((product) => (
           <div
             key={product.id}
             onClick={() => navigate(`/prodect/${product.id}`)}
-            className="flex-shrink-0 min-w-[250px] max-w-[280px] w-full border border-gray-200 p-4 rounded-md bg-white relative"
+            className="flex-shrink-0 min-w-[200px] sm:min-w-[220px] md:min-w-[240px] lg:min-w-[250px] xl:min-w-[280px] w-full border border-gray-200 p-3 sm:p-4 rounded-lg bg-white relative hover:shadow-md transition-shadow duration-200 cursor-pointer"
           >
             <div className="absolute top-2 left-2 bg-teal-500 text-white text-xs font-semibold rounded-md px-3 py-1 select-none z-10">
             {Math.round(product.discountPercentage)}%

@@ -178,26 +178,26 @@ const Product = () => {
   }, []);
 
   return (
-    <section className="container mx-auto my-6 px-[180px]  flex flex-col  justify-start lg:flex-row gap-6">
+    <section className="container mx-auto my-6 px-4 sm:px-6 lg:px-12 xl:px-20 2xl:px-42 flex flex-col justify-start lg:flex-row gap-4 sm:gap-6">
       {/* Deals of the Week */}
       {products.map((item) => (
   <div
     key={item.id}
     onClick={() => navigate(`/prodect/${item.id}`)}
-    className="flex flex-col border-2 sm:w-[300px] md:w-[300px]   border-[#ED174A] p-4 sm:p-6 w-full  lg:w-[330px] rounded-md cursor-pointer"
+    className="flex flex-col border-2 border-[#ED174A] p-3 sm:p-4 md:p-6 w-full sm:w-auto lg:w-[330px] rounded-md cursor-pointer"
   >
     <p className="text-lg sm:text-xl mb-3 sm:mb-4">
       Deals of the <span className="font-bold">week!</span>
     </p>
 
     {/* Timer */}
-    <div className="flex flex-col lg:flex-row md:flex-col justify-start sm:justify-start items-center space-x-2 sm:space-x-2 mb-4 sm:mb-6">
+    <div className="flex justify-start items-center space-x-1 sm:space-x-2 mb-3 sm:mb-4">
       {[hour, minute, second].map((unit, i) => (
         <React.Fragment key={i}>
-          <span className="text-sm sm:text-[12px] text-white font-semibold bg-[#ED174A] rounded-md py-1 sm:py-2 px-2 sm:px-3">
+          <span className="text-xs sm:text-sm text-white font-semibold bg-[#ED174A] rounded-md py-1 px-2 sm:px-3">
             {String(unit).padStart(2, '0')}
           </span>
-          {i < 2 && <span className="text-base font-semibold">:</span>}
+          {i < 2 && <span className="text-sm sm:text-base font-semibold">:</span>}
         </React.Fragment>
       ))}
     </div>
@@ -207,14 +207,14 @@ const Product = () => {
     </p>
 
     {/* Image */}
-    <div className="relative mb-4">
+    <div className="relative mb-3 sm:mb-4">
       <img
         src={item.thumbnail}
         alt={item.title}
-        className="w-full h-[180px] sm:h-[188px] object-cover mb-3 rounded-md"
+        className="w-full h-[140px] sm:h-[160px] md:h-[180px] object-cover mb-2 sm:mb-3 rounded-md"
         loading="lazy"
       />
-      <div className="absolute top-3 left-2 bg-[#ED174A]  text-white text-[11px] sm:text-[12px] font-[600] px-3 sm:px-3 py-2 sm:py-2.5 rounded-4xl">
+      <div className="absolute top-2 left-2 bg-[#ED174A] text-white text-[9px] sm:text-[10px] md:text-[11px] font-[600] px-1.5 sm:px-2 md:px-3 py-0.5 sm:py-1 md:py-2 rounded-full z-10">
         {item.discountPercentage > 0
           ? `${item.discountPercentage.toFixed(0)}%`
           : 'No Discount'}
@@ -222,39 +222,39 @@ const Product = () => {
     </div>
 
     {/* Pricing */}
-    <div className="flex items-center space-x-2 mb-2">
-      <p className="line-through text-gray-500 text-sm sm:text-[16px] font-semibold">
+    <div className="flex items-center space-x-1 sm:space-x-2 mb-2">
+      <p className="line-through text-gray-500 text-xs sm:text-sm md:text-[16px] font-semibold">
         ${(item.price * (1 + (item.discountPercentage || 0) / 100)).toFixed(2)}
       </p>
-      <p className="text-[#ED174A] text-base sm:text-[18px] font-semibold">${item.price}</p>
+      <p className="text-[#ED174A] text-sm sm:text-base md:text-[18px] font-semibold">${item.price}</p>
     </div>
 
-    <p className="text-base font-semibold mb-1">{item.title}</p>
-    <p className="text-[10px] sm:text-[11px] uppercase text-[#00B853]">In stock</p>
+    <p className="text-sm sm:text-base font-semibold mb-1 line-clamp-2">{item.title}</p>
+    <p className="text-[9px] sm:text-[10px] md:text-[11px] uppercase text-[#00B853]">In stock</p>
 
     {/* Rating */}
     <div className="flex items-center space-x-1 mt-2">
-      <span className="text-[#FFCD00] text-sm sm:text-[14px] font-semibold">
+      <span className="text-[#FFCD00] text-xs sm:text-sm md:text-[14px] font-semibold">
         {'★'.repeat(Math.floor(item.rating || 0)) +
           '☆'.repeat(5 - Math.floor(item.rating || 0))}
       </span>
-      <span className="text-[#71778E] text-xs sm:text-[13px] font-semibold">
+      <span className="text-[#71778E] text-[10px] sm:text-xs md:text-[13px] font-semibold">
         {item.rating ? '1 review' : 'No reviews'}
       </span>
     </div>
 
     {/* Availability */}
-    <div className="flex justify-end items-center w-full mt-4">
-      <p className="text-xs uppercase text-[#C2C2D3] text-end">
+    <div className="flex justify-end items-center w-full mt-3 sm:mt-4">
+      <p className="text-[10px] sm:text-xs uppercase text-[#C2C2D3] text-end">
         Available:{' '}
-        <span className="text-xs font-semibold text-[#233A95]">79</span>
+        <span className="text-[10px] sm:text-xs font-semibold text-[#233A95]">79</span>
       </p>
     </div>
 
     {/* Stock bar */}
-    <div className="w-full bg-gray-200 rounded-full h-2.5 mt-4">
+    <div className="w-full bg-gray-200 rounded-full h-2 mt-3 sm:mt-4">
       <div
-        className="bg-gradient-to-r from-[#D51243] to-[#FFCD00] h-2.5 rounded-full"
+        className="bg-gradient-to-r from-[#D51243] to-[#FFCD00] h-2 rounded-full"
         style={{ width: '79%' }}
       ></div>
     </div>
