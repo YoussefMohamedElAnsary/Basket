@@ -10,7 +10,7 @@ const Availability = ({ availability, setAvailability }) => {
   };
 
   return (
-    <div className="w-64 sm:w-48 mt-4">
+    <div className="w-full">
       <h3 className="text-sm font-medium mb-2 uppercase">Availability</h3>
       <label className="block mb-2">
         <input

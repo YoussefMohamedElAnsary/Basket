@@ -10,7 +10,7 @@ const brands = [
 
 const Brands = () => {
   return (
-    <div className=" sm:w-48 mt-4 px-4 sm:px-0">
+    <div className="w-full">
       <h3 className="text-sm font-medium mb-2 uppercase">Brands</h3>
       {brands.map((brand, index) => (
         <div
