@@ -130,7 +130,7 @@ const ProductGrid = ({ priceFrom, priceTo, availability, selectedCategories, sea
                 </span>
                 <span className="text-lg font-medium text-rose-600">${product.price}</span>
               </div>
-              <div className="flex justify-center gap-0 items-center space-x-0 sm:space-x-0">
+              <div className="flex justify-center gap-0 items-center space-x-1 sm:space-x-0">
                 <button
                   onClick={(e) => {
                     e.stopPropagation();
@@ -144,7 +144,7 @@ const ProductGrid = ({ priceFrom, priceTo, availability, selectedCategories, sea
                   type="text"
                   value={getCartItemQuantity(product.id)}
                   readOnly
-                  className="w-12 text-center bg-gray-100 border-t border-b border-gray-200 py-1.5 text-gray-700 text-sm"
+                  className="w-13 text-center bg-gray-100 border-t border-b border-gray-200 py-1 md:py-1.5 lg:py-1.5 text-gray-700 text-sm"
                 />
                 <button
                   onClick={(e) => {
