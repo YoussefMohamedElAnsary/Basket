@@ -75,7 +75,7 @@ const Navbar = () => {
                     <p className='text-gray-500 text-weight-400 hidden lg:block'>100% Secure delivery without contacting the courier</p>
                     <div className="h-4 w-[1px] bg-gray-300 mx-4 hidden lg:block"></div>
                     <div className='items-center gap-2 border-r border-gray-200 pr-4 h-full py-0 flex '>
-                        <span className='hidden lg:flex'>Need help? Call Us: </span><span className='text-[#35AFA0]'>+ 0020 500</span>
+                        <span className='hidden lg:flex'>Need help? Call Us: </span><span className='text-[#35AFA0] hidden md:flex lg:flex'>+ 0020 500</span>
                     </div>
                     <Menu as="div" className="relative inline-block">
                         <Menu.Button className="inline-flex items-center gap-1 px-2 py-1 text-sm font-medium text-gray-900 hover:bg-gray-50 focus:outline-none cursor-pointer">
@@ -198,13 +198,13 @@ const Navbar = () => {
                             <>
                                 <Link
                                     to="/signin"
-                                    className="text-white bg-[#35AFA0] px-4 py-2 rounded-full hover:bg-[#2e998e] transition-all duration-200 text-sm font-medium cursor-pointer"
+                                    className=" text-[10px] md:text-[14px] md:px-3 md:py-2 py-2 px-3 text-nowrap text-white bg-[#35AFA0] lg:px-4 lg:py-2 rounded-full hover:bg-[#2e998e] transition-all duration-200 text-sm font-medium cursor-pointer"
                                 >
                                     Sign In
                                 </Link>
                                 <Link
                                     to="/signup"
-                                    className="text-[#35AFA0] border border-[#35AFA0] px-4 py-2 rounded-full hover:bg-[#35AFA0] hover:text-white transition-all duration-200 text-sm font-medium cursor-pointer"
+                                    className=" text-[10px] md:text-[14px] md:px-3 md:py-2 py-2 px-3 text-nowrap  text-[#35AFA0] border border-[#35AFA0] lg:px-4 lg:py-2 rounded-full hover:bg-[#35AFA0] hover:text-white transition-all duration-200 text-sm font-medium cursor-pointer"
                                 >
                                     Sign Up
                                 </Link>
@@ -290,7 +290,7 @@ const Navbar = () => {
                 </div>
 
                 {/* Mobile menu */}
-                <nav className={`${isMobileMenuOpen ? 'flex' : 'hidden'} lg:flex flex-col lg:flex-row w-full lg:w-auto lg:items-center gap-4 lg:gap-8 lg:ml-10`}>
+                <nav className={`${isMobileMenuOpen ? 'flex' : 'hidden'} lg:flex  flex-col justify-start lg:flex-row w-full   gap-4 lg:gap-8 lg:ml-10`}>
                     <NavLink
                         to="/"
                         onClick={() => setSelectedMainNav('home')}
@@ -310,7 +310,7 @@ const Navbar = () => {
                         SHOP
                     </NavLink>
                     
-                                         {/* Popular Categories */}
+                    <div className=' items-start my-2 text-left'>                   {/* Popular Categories */}
                      {categories.slice(0, 3).map((category, index) => (
                          <button
                              key={index}
@@ -318,14 +318,14 @@ const Navbar = () => {
                                  handleCategoryClick(category);
                                  setSelectedMainNav(`category-${index}`);
                              }}
-                             className={`cursor-pointer hover:text-[#35AFA0] transition-colors ${
+                             className={`cursor-pointer my-2 items-start text-left  hover:text-[#35AFA0] transition-colors ${
                                  selectedMainNav === `category-${index}` ? 'text-[#35AFA0] font-bold' : 'text-gray-700 font-normal'
                              }`}
                          >
                              {(category.charAt(0).toUpperCase() + category.slice(1).replace(/-/g, ' ')).toUpperCase()}
                          </button>
                      ))}
-                    
+                    </div>  
                     <NavLink
                         to="/blog1"
                         onClick={() => setSelectedMainNav('blog')}
